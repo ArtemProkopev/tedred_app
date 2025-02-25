@@ -1,17 +1,27 @@
+<script setup>
+import Header from "./Header.vue";
+import { RouterView } from "vue-router";
+</script>
+
 <template>
     <div>
-        <h1>Hello from Vue 3!</h1>
+        <Header />
+        <main>
+            <RouterView />
+        </main>
     </div>
 </template>
 
-<script>
-export default {
-    name: "App",
-};
-</script>
-
 <style scoped>
-h1 {
-    color: #42b983;
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    background-image: url("@/assets/images/back.png");
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 </style>
