@@ -18,7 +18,7 @@ main {
     align-items: center;
     justify-content: center;
     background-color: black;
-    background-image: url("@/assets/images/back.png");
+    background-image: url("@assets/images/back.png");
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;

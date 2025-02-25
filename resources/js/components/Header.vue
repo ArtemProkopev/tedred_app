@@ -28,11 +28,11 @@ export default {
 <style scoped>
 @font-face {
     font-family: Molot;
-    src: url("@/assets/fonts/Molot.otf");
+    src: url("@assets/fonts/Molot.otf");
 }
 @font-face {
     font-family: Lexend;
-    src: url("@/assets/fonts/LexendExa-Regular.ttf");
+    src: url("@assets/fonts/LexendExa-Regular.ttf");
 }
 
 span {
@@ -56,7 +56,7 @@ h1 {
     color: white;
     width: 100%;
     height: 300px;
-    background-image: url("@/assets/images/header1.png");
+    background-image: url("@assets/images/header1.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
