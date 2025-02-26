@@ -2,46 +2,69 @@
 
 namespace App\MoonShine\Resources;
 
-use MoonShine\Resources\Resource; // Импорт базового класса
-use MoonShine\Fields\Id;         // Обратите внимание на "Id" с маленькой "d"
-use MoonShine\Fields\Text;       // Импорт текстового поля
-use MoonShine\Fields\Textarea;   // Импорт поля Textarea
-use App\Models\ContactMessage;
+use MoonShine\Core\Resources\Resource; // Правильный путь к базовому классу Resource
+use MoonShine\UI\Fields\Text;          // Правильный путь к классу Text
+use MoonShine\UI\Fields\Textarea;      // Правильный путь к классу TextArea
+use App\Models\ContactMessage;         // Модель ContactMessage
 
-class ContactMessageResource extends Resource 
+class ContactMessageResource extends Resource
 {
     public static string $model = ContactMessage::class;
 
-    public function title(): string 
+    public function title(): string
     {
-        return 'Contact Messages';
+        return 'Contact Messages'; // Заголовок в меню
     }
 
     public function fields(): array
     {
         return [
-            Id::make()->sortable(), // Обратите внимание на "Id" с маленькой "d"
             Text::make('Name', 'name')
                 ->sortable()
-                ->required(),
+                ->searchable(),
             Text::make('Email', 'email')
                 ->sortable()
-                ->required(),
+                ->searchable(),
             Text::make('Subject', 'subject')
                 ->sortable()
-                ->required(),
-            Textarea::make('Message', 'message')
-                ->required()
+                ->searchable(),
+            Textarea::make('Message', 'message') // Обратите внимание на "Textarea" (с маленькой буквы)
+                ->sortable()
+                ->searchable(),
         ];
     }
 
-    public function filters(): array 
+    public function rules($item): array
     {
         return [];
     }
 
-    public function actions(): array 
+    public function pages(): array
     {
-        return [];
+        return [
+            // Страница списка записей
+            'index' => [
+                'title' => 'All Messages',
+                'fields' => $this->fields(),
+            ],
+
+            // Страница создания записи
+            'create' => [
+                'title' => 'Create Message',
+                'fields' => $this->fields(),
+            ],
+
+            // Страница редактирования записи
+            'edit' => [
+                'title' => 'Edit Message',
+                'fields' => $this->fields(),
+            ],
+
+            // Страница просмотра одной записи
+            'show' => [
+                'title' => 'View Message',
+                'fields' => $this->fields(),
+            ],
+        ];
     }
 }

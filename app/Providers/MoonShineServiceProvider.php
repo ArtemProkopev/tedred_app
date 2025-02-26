@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace App\Providers;
@@ -18,12 +17,10 @@ class MoonShineServiceProvider extends ServiceProvider
     /**
      * @param  MoonShine  $core
      * @param  MoonShineConfigurator  $config
-     *
      */
     public function boot(CoreContract $core, ConfiguratorContract $config): void
     {
         // $config->authEnable();
-
         $core
             ->resources([
                 MoonShineUserResource::class,
@@ -32,7 +29,6 @@ class MoonShineServiceProvider extends ServiceProvider
             ])
             ->pages([
                 ...$config->getPages(),
-            ])
-        ;
+            ]);
     }
 }
