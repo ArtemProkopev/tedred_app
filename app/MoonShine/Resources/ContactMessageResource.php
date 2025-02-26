@@ -2,23 +2,32 @@
 
 namespace App\MoonShine\Resources;
 
-use MoonShine\Core\Resources\Resource; // Правильный путь к базовому классу Resource
-use MoonShine\UI\Fields\Text;          // Правильный путь к классу Text
-use MoonShine\UI\Fields\Textarea;      // Правильный путь к классу TextArea
-use App\Models\ContactMessage;         // Модель ContactMessage
+use MoonShine\Laravel\Resources\ModelResource;
+use MoonShine\UI\Fields\ID;
+use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Textarea;
+use App\Models\ContactMessage;
+use MoonShine\Support\Attributes\Icon;
+use MoonShine\MenuManager\Attributes\Group;
+use MoonShine\MenuManager\Attributes\Order;
 
-class ContactMessageResource extends Resource
+#[Icon('heroicons.chat-bubble-left-ellipsis')]  // Пример иконки из Heroicons
+#[Group('General')]
+#[Order(2)]
+class ContactMessageResource extends ModelResource
 {
-    public static string $model = ContactMessage::class;
+    public string $model = ContactMessage::class;
+    public string $column = 'name'; // Или 'email', в зависимости от нужного отображения
 
     public function title(): string
     {
-        return 'Contact Messages'; // Заголовок в меню
+        return 'Contact Messages';
     }
 
-    public function fields(): array
+    protected function indexFields(): iterable
     {
         return [
+            ID::make()->sortable(),
             Text::make('Name', 'name')
                 ->sortable()
                 ->searchable(),
@@ -28,43 +37,23 @@ class ContactMessageResource extends Resource
             Text::make('Subject', 'subject')
                 ->sortable()
                 ->searchable(),
-            Textarea::make('Message', 'message') // Обратите внимание на "Textarea" (с маленькой буквы)
-                ->sortable()
-                ->searchable(),
+            Textarea::make('Message', 'message')
+                ->hideOnIndex()
         ];
     }
 
-    public function rules($item): array
+    protected function formFields(): iterable
+    {
+        return $this->indexFields();
+    }
+
+    protected function detailFields(): iterable
+    {
+        return $this->indexFields();
+    }
+
+    public function rules($item): array 
     {
         return [];
-    }
-
-    public function pages(): array
-    {
-        return [
-            // Страница списка записей
-            'index' => [
-                'title' => 'All Messages',
-                'fields' => $this->fields(),
-            ],
-
-            // Страница создания записи
-            'create' => [
-                'title' => 'Create Message',
-                'fields' => $this->fields(),
-            ],
-
-            // Страница редактирования записи
-            'edit' => [
-                'title' => 'Edit Message',
-                'fields' => $this->fields(),
-            ],
-
-            // Страница просмотра одной записи
-            'show' => [
-                'title' => 'View Message',
-                'fields' => $this->fields(),
-            ],
-        ];
     }
 }
