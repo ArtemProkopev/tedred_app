@@ -81,6 +81,11 @@
             </button>
         </form>
 
+        <!-- Status message -->
+        <div v-if="statusMessage" :class="statusClass" class="statusMessage">
+            {{ statusMessage }}
+        </div>
+
         <footer class="mainFooter">
             <div class="footerContent">
                 <div class="footerColumn leftColumn">
@@ -130,6 +135,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
     data() {
         return {
@@ -139,12 +146,29 @@ export default {
                 subject: "",
                 message: "",
             },
+            statusMessage: "",
+            statusClass: "",
         };
     },
     methods: {
         handleSubmit() {
-            console.log("Form submitted:", this.formData);
-            this.resetForm();
+            // Display loading status
+            this.statusMessage = "Sending your message...";
+            this.statusClass = "loading";
+
+            axios
+                .post("/contact", this.formData)
+                .then((response) => {
+                    this.statusMessage =
+                        response.data.message || "Message sent successfully!";
+                    this.statusClass = "success";
+                    this.resetForm();
+                })
+                .catch((error) => {
+                    this.statusMessage =
+                        "Something went wrong. Please try again later.";
+                    this.statusClass = "error";
+                });
         },
         resetForm() {
             this.formData = {
@@ -159,6 +183,29 @@ export default {
 </script>
 
 <style scoped>
+.statusMessage {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.loading {
+    background-color: #f3e5ab;
+    color: #9e9d24;
+}
+
+.success {
+    background-color: #c8e6c9;
+    color: #388e3c;
+}
+
+.error {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
 @font-face {
     font-family: Lexend;
     src: url("@assets/fonts/LexendExa-Regular.ttf");
@@ -355,32 +402,7 @@ select {
     transition: filter 0.3s;
 }
 
-.footerContent {
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.leftColumn {
-    flex: 1;
-    min-width: 200px;
-    padding: 20px 0 20px 40px;
-}
-
-.rightColumn {
-    display: flex;
-    justify-content: flex-end;
-    gap: 40px;
-    align-items: center;
-}
-
-.navigationConnect {
-    display: flex;
-    gap: 40px;
-}
-
-.socialIcon:hover img {
+.socialIcon img:hover {
     filter: brightness(1);
 }
 </style>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d223658425e84f479262e5d9e92be99",
+    "content-hash": "5f9ea5f079f726e735a4ccc5888ecf7f",
     "packages": [
         {
             "name": "brick/math",
@@ -2261,24 +2261,57 @@
                 }
             },
             "autoload": {
+                "psr-4": {
+                    "MoonShine\\": "src/",
+                    "MoonShine\\AssetManager\\": "src/AssetManager/src",
+                    "MoonShine\\ColorManager\\": "src/ColorManager/src",
+                    "MoonShine\\Contracts\\": "src/Contracts/src",
+                    "MoonShine\\Core\\": "src/Core/src",
+                    "MoonShine\\Laravel\\": "src/Laravel/src",
+                    "MoonShine\\Laravel\\Database\\Factories\\": "src/Laravel/database/factories/",
+                    "MoonShine\\MenuManager\\": "src/MenuManager/src",
+                    "MoonShine\\Support\\": "src/Support/src",
+                    "MoonShine\\UI\\": "src/UI/src"
+                },
                 "files": [
                     "src/Laravel/src/helpers.php",
                     "src/Support/src/helpers.php"
-                ],
+                ]
+            },
+            "autoload-dev": {
                 "psr-4": {
-                    "MoonShine\\": "src/",
-                    "MoonShine\\UI\\": "src/UI/src",
-                    "MoonShine\\Core\\": "src/Core/src",
-                    "MoonShine\\Laravel\\": "src/Laravel/src",
-                    "MoonShine\\Support\\": "src/Support/src",
-                    "MoonShine\\Contracts\\": "src/Contracts/src",
-                    "MoonShine\\MenuManager\\": "src/MenuManager/src",
-                    "MoonShine\\AssetManager\\": "src/AssetManager/src",
-                    "MoonShine\\ColorManager\\": "src/ColorManager/src",
-                    "MoonShine\\Laravel\\Database\\Factories\\": "src/Laravel/database/factories/"
+                    "App\\": "app/",
+                    "MoonShine\\Tests\\": "tests/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "analyse": [
+                    "vendor/bin/phpstan analyse src --memory-limit=-1"
+                ],
+                "rector": [
+                    "vendor/bin/rector process --clear-cache"
+                ],
+                "rector:dry": [
+                    "vendor/bin/rector process --clear-cache --dry-run"
+                ],
+                "test": [
+                    "vendor/bin/pest"
+                ],
+                "test:bail": [
+                    "vendor/bin/pest --bail"
+                ],
+                "test:fresh": [
+                    "rm -rf vendor/orchestra",
+                    "composer install",
+                    "vendor/bin/pest --bail"
+                ],
+                "format": [
+                    "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+                ],
+                "monorepo:merge": [
+                    "vendor/bin/monorepo-builder merge"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2303,12 +2336,12 @@
             },
             "funding": [
                 {
-                    "url": "https://github.com/moonshine-software",
-                    "type": "github"
+                    "type": "github",
+                    "url": "https://github.com/moonshine-software"
                 },
                 {
-                    "url": "https://opencollective.com/moonshine",
-                    "type": "open_collective"
+                    "type": "open_collective",
+                    "url": "https://opencollective.com/moonshine"
                 }
             ],
             "time": "2025-02-26T08:19:21+00:00"
@@ -8442,7 +8475,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
