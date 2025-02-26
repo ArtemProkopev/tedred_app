@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
-use MoonShine\Laravel\Layouts\CompactLayout;
+use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\ColorManager\ColorManager;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Laravel\Components\Layout\{Locales, Notifications, Profile, Search};
@@ -31,7 +31,7 @@ use MoonShine\UI\Components\{Breadcrumbs,
     Layout\Wrapper,
     When};
 
-final class MoonShineLayout extends CompactLayout
+final class MoonShineLayout extends AppLayout
 {
     protected function assets(): array
     {

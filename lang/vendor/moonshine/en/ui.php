@@ -39,7 +39,7 @@ return [
         'mark_as_read' => 'Mark as read',
     ],
     'login' => [
-        'title' => 'Welcome to TedRed',
+        'title' => 'Welcome to :moonshine_title!',
         'description' => 'Please sign-in to your account',
         'authorization' => 'Authorization',
         'remember_me' => 'Remember me',
