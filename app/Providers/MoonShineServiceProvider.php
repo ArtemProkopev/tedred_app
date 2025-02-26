@@ -11,6 +11,7 @@ use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
 use App\MoonShine\Resources\ContactMessageResource;
+use App\MoonShine\Resources\TestResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -20,12 +21,13 @@ class MoonShineServiceProvider extends ServiceProvider
      */
     public function boot(CoreContract $core, ConfiguratorContract $config): void
     {
-        // $config->authEnable();
+        $config->authEnable();
         $core
             ->resources([
                 MoonShineUserResource::class,
                 MoonShineUserRoleResource::class,
                 ContactMessageResource::class,
+                TestResource::class,
             ])
             ->pages([
                 ...$config->getPages(),

@@ -11,9 +11,9 @@ use MoonShine\Support\Attributes\Icon;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
 
-#[Icon('heroicons.chat-bubble-left-ellipsis')]  // Пример иконки из Heroicons
-#[Group('General')]
-#[Order(2)]
+// #[Icon('heroicons.chat-bubble-left-ellipsis')]  // Пример иконки из Heroicons
+// #[Group('Other')]
+// #[Order(2)]
 class ContactMessageResource extends ModelResource
 {
     public string $model = ContactMessage::class;
