@@ -1,11 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\ContactMessage;
-use App\Models\Test; // Импортируем модель Test
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
-class ContactMessageController extends Controller
+class FeedbackController extends Controller
 {
     // Метод для обработки данных формы
     public function store(Request $request)
@@ -18,11 +17,8 @@ class ContactMessageController extends Controller
             'message' => 'required|string',
         ]);
 
-        // Сохраняем сообщение в таблицу contact_messages
-        ContactMessage::create($validated);
-
-        // Сохраняем те же данные в таблицу tests
-        Test::create($validated);
+        // Сохраняем те же данные в таблицу feedbacks
+        Feedback::create($validated);
 
         // Возвращаем успешный ответ
         return response()->json(['message' => 'Your message has been sent!'], 200);
@@ -31,7 +27,7 @@ class ContactMessageController extends Controller
     // Метод для получения всех сообщений
     public function index()
     {
-        $messages = ContactMessage::all();
+        $messages = Feedback::all();
         return response()->json($messages);
     }
 }

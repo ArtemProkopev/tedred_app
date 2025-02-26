@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Test;
+use App\Models\Feedback;
 use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
@@ -15,14 +14,19 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\UI\ComponentContract;
 
 /**
- * @extends ModelResource<Test>
+ * @extends ModelResource<Feedback>
  */
-class TestResource extends ModelResource
+class FeedbackResource extends ModelResource
 {
-    protected string $model = Test::class;
+    protected string $model = Feedback::class;
 
-    protected string $title = 'Tests';
-    
+    protected string $title = 'Feedbacks';
+
+    public function getTitle(): string
+    {
+        return 'Feedbacks'; // Название в боковом меню
+    }
+
     /**
      * @return list<FieldContract>
      */
@@ -30,12 +34,9 @@ class TestResource extends ModelResource
     {
         return [
             ID::make()->sortable(),
-            Text::make('Name', 'name')
-                ->sortable(),
-            Text::make('Email', 'email')
-                ->sortable(),
-            Text::make('Subject', 'subject')
-                ->sortable(),
+            Text::make('Name', 'name')->sortable(),
+            Text::make('Email', 'email')->sortable(),
+            Text::make('Subject', 'subject')->sortable(),
             Textarea::make('Message', 'message'),
         ];
     }
@@ -63,10 +64,9 @@ class TestResource extends ModelResource
     }
 
     /**
-     * @param Test $item
+     * @param Feedback $item
      *
      * @return array<string, string[]|string>
-     * @see https://laravel.com/docs/validation#available-validation-rules
      */
     protected function rules(mixed $item): array
     {

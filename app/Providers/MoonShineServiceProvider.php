@@ -10,8 +10,7 @@ use MoonShine\Laravel\DependencyInjection\MoonShine;
 use MoonShine\Laravel\DependencyInjection\MoonShineConfigurator;
 use App\MoonShine\Resources\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRoleResource;
-use App\MoonShine\Resources\ContactMessageResource;
-use App\MoonShine\Resources\TestResource;
+use App\MoonShine\Resources\FeedbackResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -26,8 +25,7 @@ class MoonShineServiceProvider extends ServiceProvider
             ->resources([
                 MoonShineUserResource::class,
                 MoonShineUserRoleResource::class,
-                ContactMessageResource::class,
-                TestResource::class,
+                FeedbackResource::class,
             ])
             ->pages([
                 ...$config->getPages(),
