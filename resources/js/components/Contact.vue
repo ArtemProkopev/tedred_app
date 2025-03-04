@@ -8,6 +8,8 @@
                 or contact us
             </p>
 
+            <p>Hello</p>
+
             <p class="secondText">
                 Technical Support: We have a self-service Knowledge Base with
                 solutions to most types of issues reported by players.<br />
