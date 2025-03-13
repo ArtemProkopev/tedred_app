@@ -12,5 +12,6 @@ Route::get('/{any}', function () {
 })->where('any', '.*');
 
 Route::post('/contact', [FeedbackController::class, 'store']);
+Route::post('/news', [FeedbackController::class, 'store']);
 Route::get('/admin/messages', [FeedbackController::class, 'index']);
 

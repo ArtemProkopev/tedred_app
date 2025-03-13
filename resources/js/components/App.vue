@@ -1,11 +1,9 @@
 <script setup>
-import Header from "./Header.vue";
 import { RouterView } from "vue-router";
 </script>
 
 <template>
     <div>
-        <Header />
         <main>
             <RouterView />
         </main>
@@ -14,7 +12,7 @@ import { RouterView } from "vue-router";
 
 <style scoped>
 main {
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
     background-color: black;

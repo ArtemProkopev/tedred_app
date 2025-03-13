@@ -6,7 +6,11 @@ const routes = [
         name: "contact",
         component: () => import("./components/Contact.vue"),
     },
-    // другие маршруты
+    {
+        path: "/news",
+        name: "news",
+        component: () => import("./components/News.vue"),
+    },
 ];
 
 const router = createRouter({

@@ -7,7 +7,7 @@
             <nav class="navigation">
                 <ul>
                     <li><router-link to="/">home</router-link></li>
-                    <li><a href="#home">news</a></li>
+                    <li><router-link to="/news">news</router-link></li>
                     <li><a href="#games">games</a></li>
                     <li><a href="#team">team</a></li>
                     <li><a href="#about">about us</a></li>
@@ -28,11 +28,26 @@ export default {
 <style scoped>
 @font-face {
     font-family: Molot;
-    src: url("@assets/fonts/Molot.otf");
+    src: url("@assets/fonts/Molot.woff");
 }
 @font-face {
     font-family: Lexend;
-    src: url("@assets/fonts/LexendExa-Regular.ttf");
+    src: url("@assets/fonts/LexendExa-Regular.woff");
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222;
+    color: white;
+    width: 100%;
+    height: 300px;
+    background-image: url("@assets/images/header1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
 }
 
 span {
@@ -45,22 +60,6 @@ h1 {
     text-align: center;
     margin-top: 10px;
     line-height: 0.8;
-}
-
-.header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #222;
-    color: white;
-    width: 100%;
-    height: 300px;
-    background-image: url("@assets/images/header1.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    position: relative;
 }
 
 .logoLinks {
@@ -82,6 +81,11 @@ h1 {
     margin-right: 10px;
 }
 
+.navigation {
+    padding: 20px;
+    padding-left: 20px;
+}
+
 .navigation ul {
     list-style: none;
     display: flex;
@@ -99,4 +103,9 @@ h1 {
 .navigation a:hover {
     color: #ffc851;
 }
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 </style>

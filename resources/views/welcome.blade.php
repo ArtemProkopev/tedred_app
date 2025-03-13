@@ -6,6 +6,11 @@
     <title>Vue App</title>
     @vite(['resources/js/app.js'])
 </head>
+<style>
+    body {
+        margin: 0;
+    }
+</style>
 <body>
     <div id="app">
         <app></app>
