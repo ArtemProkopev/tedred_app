@@ -1,16 +1,16 @@
 <template>
     <footer class="mainFooter">
-            <div class="footerContent">
-                <div class="footerColumn leftColumn">
+            <article class="footerContent">
+                <section class="footerColumn leftColumn">
                     <h3 class="footerLogo">TEDRED GAMES</h3>
                     <div class="copyright">
                         © 2025 Tedred Games. All rights reserved.
                     </div>
-                </div>
+                </section>
 
-                <div class="footerColumn rightColumn forRight">
-                    <div class="navigationConnect">
-                        <div class="footerColumn">
+                <section class="footerColumn rightColumn forRight">
+                    <section class="navigationConnect">
+                        <section class="footerColumn">
                             <p class="footerTitle">NAVIGATION</p>
                             <ul class="footerLinks">
                                 <li><a href="#">news</a></li>
@@ -18,11 +18,11 @@
                                 <li><a href="#">team</a></li>
                                 <li><a href="#">contact</a></li>
                             </ul>
-                        </div>
+                        </section>
 
-                        <div class="footerColumn">
+                        <section class="footerColumn">
                             <p class="footerTitle">CONNECT</p>
-                            <div class="socialLinks">
+                            <section class="socialLinks">
                                 <a href="#" class="socialIcon"
                                     ><img
                                         src="@assets/images/instagram.svg"
@@ -38,11 +38,11 @@
                                         src="@assets/images/steam.svg"
                                         alt="Steam"
                                 /></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </article>
         </footer>
 </template>
 
