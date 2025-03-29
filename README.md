@@ -80,7 +80,7 @@ resources/
 -   **Frontend**: `http://localhost:5173`
 -   **Backend (Laravel)**: `http://localhost:8000`
 -   **Admin (Moonshine)**: `/admin`
-    -   Логин: `admin@tedred.com`
+    -   Логин: `artemprokopev@internet.ru`
     -   Пароль: `secret`
 
 ---
