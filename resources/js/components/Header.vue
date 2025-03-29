@@ -16,7 +16,6 @@
             </nav>
         </section>
         <h1><span>TedRed</span><br />Games</h1>
-        <p>hghghg</p>
     </header>
 </template>
 
