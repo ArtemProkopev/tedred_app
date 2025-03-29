@@ -15,7 +15,7 @@
                 </ul>
             </nav>
         </section>
-        <h1><span>TedRed</span><br />Games</h1>
+        <h1><span>TedRehhhhd</span><br />Games</h1>
     </header>
 </template>
 

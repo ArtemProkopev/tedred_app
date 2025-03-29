@@ -8,7 +8,7 @@ import Footer from "./Footer.vue";
         <Header />
     </header>
     <main>
-        <p>Привет</p>
+        <p>Приветnnnggg</p>
     </main>
 
     <footer>
