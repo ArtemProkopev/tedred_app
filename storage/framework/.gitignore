@@ -1,3 +1,12 @@
+*
+!.gitignore
+!cache/
+!sessions/
+!views/
+!testing/
+!logs/
+
+# Laravel generated files
 compiled.php
 config.php
 down
@@ -7,3 +16,36 @@ routes.php
 routes.scanned.php
 schedule-*
 services.json
+package-manifest.php
+precompiled.php
+config.scanned.php
+
+# Cache files
+cache/*
+!cache/.gitkeep
+
+# Session files
+sessions/*
+!sessions/.gitkeep
+
+# View compiled files
+views/*
+!views/.gitkeep
+
+# Testing artifacts
+testing/*
+!testing/.gitkeep
+
+# Log files (если хранятся здесь)
+logs/*
+!logs/.gitkeep
+
+# Временные файлы очередей
+queues/
+jobs/
+
+# Файлы кеша опций
+options.php
+
+# Файлы для Horizon (если используется)
+horizon-*

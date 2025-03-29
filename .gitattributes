@@ -1,11 +1,39 @@
 * text=auto eol=lf
 
+# ====================
+# File Specific Handling
+# ====================
 *.blade.php diff=html
 *.css diff=css
 *.html diff=html
+*.js diff=js
+*.json diff=json
 *.md diff=markdown
 *.php diff=php
+*.svg diff=svg
+*.vue diff=html
 
+# ====================
+# Export Ignore
+# ====================
 /.github export-ignore
+/.editorconfig export-ignore
+/.styleci.yml export-ignore
 CHANGELOG.md export-ignore
-.styleci.yml export-ignore
+CONTRIBUTING.md export-ignore
+LICENSE.md export-ignore
+README.md export-ignore
+SECURITY.md export-ignore
+
+# ====================
+# Binary Files
+# ====================
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary

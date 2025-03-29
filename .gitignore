@@ -1,23 +1,70 @@
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
+# ====================
+# Laravel
+# ====================
+/vendor/
+/node_modules/
+/public/build/
+/public/hot/
 /public/storage
 /storage/*.key
-/storage/pail
-/vendor
-.env
+/storage/pail/
+/.env*
+!.env.example
 .env.backup
-.env.production
-.phpactor.json
+.phpunit.cache
 .phpunit.result.cache
-Homestead.json
-Homestead.yaml
 npm-debug.log
 yarn-error.log
-/auth.json
-/.fleet
+composer.lock
+package-lock.json
+yarn.lock
+
+# ====================
+# IDE & Editors
+# ====================
 /.idea
-/.nova
 /.vscode
+/.fleet
+/.nova
 /.zed
+*.swp
+*.swo
+*.sublime-*
+
+# ====================
+# System & Deployment
+# ====================
+Homestead.json
+Homestead.yaml
+/auth.json
+/.phpactor.json
+/docker-compose.override.yml
+/.docker/*.env
+
+# ====================
+# Frontend
+# ====================
+/public/js/
+/public/css/
+/public/mix-manifest.json
+/public/fonts/
+/public/images/
+
+# ====================
+# Testing & Debug
+# ====================
+/.phpunit.cache
+/coverage/
+/reports/
+*.cache
+
+# ====================
+# OS generated files
+# ====================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
