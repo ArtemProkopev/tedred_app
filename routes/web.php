@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use function view;
 use App\Http\Controllers\FeedbackController;
 
 // Route::get('/', function () {
@@ -8,7 +9,7 @@ use App\Http\Controllers\FeedbackController;
 // });
 
 Route::get('/{any}', function () {
-    return view('welcome'); // Или другая Blade-страница, в которой подключено Vue
+    return view('welcome');
 })->where('any', '.*');
 
 Route::post('/contact', [FeedbackController::class, 'store']);
