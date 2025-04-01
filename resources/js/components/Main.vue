@@ -1,142 +1,164 @@
 <script setup>
-import Header from "./Header.vue";
+import { Splide } from "@splidejs/splide";
+import "@splidejs/splide/dist/css/splide.min.css";
+import { onMounted, ref } from "vue";
 import Footer from "./Footer.vue";
-import { ref, onMounted } from 'vue';
-import { Splide } from '@splidejs/splide';
-import '@splidejs/splide/dist/css/splide.min.css';
+import Header from "./Header.vue";
+
+import gameimg from "/resources/assets/images/main/gameimg.png";
+import title1 from "/resources/assets/images/main/title1.png";
+import title2 from "/resources/assets/images/main/title2.png";
+import title3 from "/resources/assets/images/main/title3.png";
+import steam from "/resources/assets/images/main/steam.png";
 
 const newsItems = ref([
-  { 
-    title: 'Feed The Gods out now!',
-    description: 'This day has finally come. Rise to greatness in Feed The G...',
-    image: '@/assets/images/main/title1.png'
-  },  
-  { 
-    title: 'Feed The Gods Release Date',
-    description: 'The Ancient One stir, hungry for devotion and sacrifi...',
-    image: '@/assets/images/main/title1.png'
-  },
-  {
-    title: 'Dev Diary #4 - Release Date and future plans!',
-    description: 'Wow, Its been a long time since we have been in tou...',
-    image: '@/assets/images/main/title1.png'
-  },
-  {
-     title: 'The Playtests starts!', 
-     description: 'Visit the Feed The Gods Steam store page starting today...',
-     image: '@/assets/images/main/title1.png'
-  },
-  {
-    title: 'Play FEED THE GODS on Steam Next Fest!',
-    description: 'The demo version of our chaotic party card battler Feed The Gods...',
-    image: '@/assets/images/main/title1.png'
-  },
+    {
+        title: "Feed The Gods out now!",
+        description:
+            "This day has finally come. Rise to greatness in Feed The G...",
+        image: title1,
+    },
+    {
+        title: "Feed The Gods Release Date",
+        description: "The Ancient One stir, hungry for devotion and sacrifi...",
+        image: title2,
+    },
+    {
+        title: "Dev Diary #4 - Release Date and future plans!",
+        description: "Wow, Its been a long time since we have been in tou...",
+        image: title3,
+    },
+    {
+        title: "The Playtests starts!",
+        description:
+            "Visit the Feed The Gods Steam store page starting today...",
+        image: title1,
+    },
+    {
+        title: "Play FEED THE GODS on Steam Next Fest!",
+        description:
+            "The demo version of our chaotic party card battler Feed The Gods...",
+        image: title1,
+    },
 ]);
 
-
 const gameItems = ref([
-  {
-    title: 'Feed The Gods',
-    description: 'Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.',
-    image: '@assets/images/main/gameimg.png'
-  },
-  {
-    title: 'The Secret Ties of Strandcliff',
-    description: 'A detective game where you have to play with information while being a successful ram. Communicate with visitors to your establishment, eavesdrop on their conversations, collect information.',
-    image: '@assets/images/main/gameimg.png'
-  },
-  {
-    title: 'Feed The Gods',
-    description: 'Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.',
-    image: '@assets/images/main/gameimg.png'
-  },
+    {
+        title: "Feed The Gods",
+        description:
+            "Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.",
+        image: gameimg,
+    },
+    {
+        title: "The Secret Ties of Strandcliff",
+        description:
+            "A detective game where you have to play with information while being a successful ram. Communicate with visitors to your establishment, eavesdrop on their conversations, collect information.",
+        image: gameimg,
+    },
+    {
+        title: "Feed The Gods",
+        description:
+            "Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.",
+        image: gameimg,
+    },
 ]);
 
 onMounted(() => {
-  const splideElement = document.querySelector('.splide');
-  if (splideElement) {
-    new Splide(splideElement, {
-      type: 'loop',
-      height: '9rem',
-      trimSpace: 'move',
-      perPage: 3,
-      start: 0,
-      pagination: false,
-      classes: {
-        arrows: 'splide__arrows custom-arrows',
-        arrow: 'splide__arrow custom-arrow',
-        prev: 'splide__arrow--prev custom-prev',
-        next: 'splide__arrow--next custom-next',
-      },
-      breakpoints: {
-        640: {
-          height: '6rem',
-        },
-      },
-    }).mount();
-  }
+    const splideElement = document.querySelector(".splide");
+    if (splideElement) {
+        new Splide(splideElement, {
+            type: "loop",
+            height: "9rem",
+            trimSpace: "move",
+            perPage: 3,
+            start: 0,
+            pagination: false,
+            classes: {
+                arrows: "splide__arrows custom-arrows",
+                arrow: "splide__arrow custom-arrow",
+                prev: "splide__arrow--prev custom-prev",
+                next: "splide__arrow--next custom-next",
+            },
+            breakpoints: {
+                640: {
+                    height: "6rem",
+                },
+            },
+        }).mount();
+    }
 });
 </script>
 
 <template>
   <header>
-    <Header />
+      <Header />
   </header>
   <main>
-    <section class="mainTitleBlock">
-      <section class="title-wrapper">
-        <p class="quote quote-left">"</p>
-        <div class="title-content">
-          <p class="mainTitleText"><span>TedRed</span> is a small developer with big ambitions</p>
-          <p class="supportMainTitleText">We make games that spark your imagination like the games you played as a kid.</p>
-        </div>
-        <p class="quote quote-right">"</p>
+      <section class="mainTitleBlock">
+          <section class="title-wrapper">
+              <p class="quote quote-left">"</p>
+              <div class="title-content">
+                  <p class="mainTitleText">
+                      <span>TedRed</span> is a small developer with big ambitions
+                  </p>
+                  <p class="supportMainTitleText">
+                      We make games that spark your imagination like the games
+                      you played as a kid.
+                  </p>
+              </div>
+              <p class="quote quote-right">"</p>
+          </section>
       </section>
-    </section>
 
+      <p class="titleText">News</p>
+      <section class="splide" aria-label="Slide Container Example">
+          <div class="splide__track">
+              <ul class="splide__list">
+                  <li
+                      class="splide__slide"
+                      v-for="(item, index) in newsItems"
+                      :key="index"
+                  >
+                      <div class="splide__slide__container">
+                          <img :src="item.image" :alt="item.title" />
+                      </div>
+                      <h3 class="splideTitle">{{ item.title }}</h3>
+                      <p class="splideDescription">{{ item.description }}</p>
+                  </li>
+              </ul>
+          </div>
+      </section>
 
-    <p class="titleText">News</p>
-    <section class="splide" aria-label="Slide Container Example">
-      <div class="splide__track">
-        <ul class="splide__list">
-          <li class="splide__slide" v-for="(item, index) in newsItems" :key="index">
-            <div class="splide__slide__container">
-              <img :src="item.image" alt="News Image">
-            </div>
-            <h3 class="splideTitle">{{ item.title }}</h3>
-            <p class="splideDescription">{{ item.description }}</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <button class="cta-button" id="seeAll" @click="handlePlayClick">See all</button>
-
-    <section class="games">
-    <h2 class="titleText">Our <span>games</span></h2>
-    <div class="game-item" v-for="(game, index) in gameItems" :key="index">
-      <div class="game-content">
-        <div class="game-image">
-          <img :src="game.image" alt="Game Image">
-        </div>
-        <div class="game-text">
-          <h3 class="gamesTitle">{{ game.title }}</h3>
-          <p class="gamesDescription">{{ game.description }}</p>
-          <p class="available">Available on</p>
-          <img src="@assets/images/main/steam.png">
-        </div>
-      </div>
-      <button class="cta-button" @click="handlePlayClick">Game page</button>
-    </div>
-  </section>
-
-
+      <section class="games">
+          <h2 class="titleText">Our <span>games</span></h2>
+          <div
+              class="game-item"
+              v-for="(game, index) in gameItems"
+              :key="index"
+          >
+              <section class="game-content">
+                <section class="highPartGame">
+                  <div class="game-image">
+                      <img :src="game.image" :alt="game.title" />
+                  </div>
+                  <div class="game-text">
+                      <h3 class="gamesTitle">{{ game.title }}</h3>
+                      <p class="gamesDescription">{{ game.description }}</p>
+                      <p class="available">Available on</p>
+                      <img :src="steam" alt="Steam" class="steam-logo" />
+                  </div>
+                </section>
+                  <button class="cta-button" @click="handlePlayClick">Game page</button>
+              </section>
+          </div>
+      </section>
   </main>
 
   <footer>
-    <Footer />
-  </footer>  
+      <Footer />
+  </footer>
 </template>
+
 
 <style scoped>
 @font-face {
@@ -183,7 +205,7 @@ main {
 }
 
 .quote {
-  font-size: 128px; 
+  font-size: 128px;
   color: #AFAFAF;
   line-height: 0.5;
   margin: 0;
@@ -197,7 +219,7 @@ main {
 
 .quote-right {
   float: right;
-  margin-left: 10px; 
+  margin-left: 10px;
   margin-top: 100px;
 }
 
@@ -239,9 +261,9 @@ main {
   position: relative;
   background: #1a1a1a;
   background-image: url('@assets/images/news/cardback.jpg');
-  background-size: cover; 
+  background-size: cover;
   background-position: center;
-  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.616); 
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.616);
 }
 
 .game-item::before {
@@ -251,35 +273,30 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.685); 
-    z-index: 1; 
+    background: rgba(0, 0, 0, 0.685);
+    z-index: 1;
 }
 
 .game-item > * {
-    position: relative; 
-    z-index: 2; 
+    position: relative;
+    z-index: 2;
 }
 
 .game-content {
   display: flex;
+  align-items: center;
   flex: 1;
 }
 
 .game-image {
-  width: 240px;
-  height: 80%;
-  background-color: #bbb;
-  margin-right: 10px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .game-text {
-  flex: 1; 
-}
-
-.pageButton {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  flex: 1;
 }
 
 .games {
@@ -289,6 +306,12 @@ main {
   flex-direction: column;
   gap: 50px;
   margin-top: 100px;
+}
+
+.highPartGame {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .games span {
@@ -304,6 +327,7 @@ main {
 .gamesDescription {
   font-size: 15px;
   color: #BAB8B8;
+  width: 400px;
 }
 
 .available {
@@ -311,7 +335,7 @@ main {
 }
 
 .cta-button {
-    align-self: flex-end; 
+    align-self: flex-end;
     background-image: url('@assets/images/news/button.jpg');
     background-size: cover;
     color: white;
@@ -323,6 +347,7 @@ main {
     transition: transform 0.2s;
     font-family: Molot;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .cta-button:hover {
@@ -340,13 +365,13 @@ main {
 .splide {
   position: relative;
   margin: 20px auto;
-  max-width: 1000px; 
+  max-width: 1000px;
   margin-top: 100px;
 }
 
 .splide__slide {
   background: rgba(0, 0, 0, 0.8);
-  padding: 20px; 
+  padding: 20px;
   color: white;
   text-align: center;
   transition: transform 0.3s;
@@ -359,8 +384,8 @@ main {
 
 .splide__slide img {
   width: 100%;
-  border-radius: 10px; 
-  margin-bottom: 10px; 
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .custom-arrow {
@@ -374,7 +399,7 @@ main {
 }
 
 .custom-next {
-  right: -100px !important; 
+  right: -100px !important;
 }
 
 .splide__arrow--prev {
@@ -397,12 +422,41 @@ main {
 }
 
 @media (max-width: 768px) {
-  .quote {
-    font-size: 64px;
-  }
-  
-  .title-wrapper {
-    gap: 10px;
-  }
+    .quote {
+        font-size: 64px;
+    }
+
+    .title-wrapper {
+        gap: 10px;
+        flex-direction: column;
+    }
+
+    .game-content {
+        flex-direction: column;
+    }
+
+    .game-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .splide__slide {
+        max-width: 280px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainTitleBlock .mainTitleText {
+        font-size: 2rem;
+    }
+
+    .titleText {
+        font-size: 48px;
+    }
+
+    .gamesTitle {
+        font-size: 28px;
+    }
 }
 </style>
+
