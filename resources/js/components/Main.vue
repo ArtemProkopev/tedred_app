@@ -237,6 +237,27 @@ main {
   display: flex;
   flex-direction: column;
   position: relative;
+  background: #1a1a1a;
+  background-image: url('@assets/images/news/cardback.jpg');
+  background-size: cover; 
+  background-position: center;
+  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.616); 
+}
+
+.game-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.685); 
+    z-index: 1; 
+}
+
+.game-item > * {
+    position: relative; 
+    z-index: 2; 
 }
 
 .game-content {
