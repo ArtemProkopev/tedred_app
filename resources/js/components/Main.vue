@@ -94,6 +94,7 @@ onMounted(() => {
       <Header />
   </header>
   <main>
+    <p>sssss</p>
       <section class="mainTitleBlock">
           <section class="title-wrapper">
               <p class="quote quote-left">"</p>
