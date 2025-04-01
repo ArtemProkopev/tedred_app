@@ -9,35 +9,47 @@ const newsItems = ref([
   { 
     title: 'Feed The Gods out now!',
     description: 'This day has finally come. Rise to greatness in Feed The G...',
-    image: '@/assets/images/main/gamescard/title1.png'
+    image: '@/assets/images/main/title1.png'
   },  
   { 
     title: 'Feed The Gods Release Date',
     description: 'The Ancient One stir, hungry for devotion and sacrifi...',
-    image: '@/assets/images/main/gamescard/title1.png'
+    image: '@/assets/images/main/title1.png'
   },
   {
     title: 'Dev Diary #4 - Release Date and future plans!',
     description: 'Wow, Its been a long time since we have been in tou...',
-    image: '@/assets/images/main/gamescard/title1.png'
+    image: '@/assets/images/main/title1.png'
   },
   {
      title: 'The Playtests starts!', 
      description: 'Visit the Feed The Gods Steam store page starting today...',
-     image: '@/assets/images/main/gamescard/title1.png'
+     image: '@/assets/images/main/title1.png'
   },
   {
     title: 'Play FEED THE GODS on Steam Next Fest!',
     description: 'The demo version of our chaotic party card battler Feed The Gods...',
-    image: '@/assets/images/main/gamescard/title1.png'
+    image: '@/assets/images/main/title1.png'
   },
 ]);
 
 
 const gameItems = ref([
-  { title: 'Feed The Gods', description: 'Feed The Gods is a casual card game...' },
-  { title: 'Feed The Gods', description: 'Feed The Gods is a casual card game...' },
-  { title: 'Feed The Gods', description: 'Feed The Gods is a casual card game...' },
+  {
+    title: 'Feed The Gods',
+    description: 'Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.',
+    image: '@assets/images/main/gameimg.png'
+  },
+  {
+    title: 'The Secret Ties of Strandcliff',
+    description: 'A detective game where you have to play with information while being a successful ram. Communicate with visitors to your establishment, eavesdrop on their conversations, collect information.',
+    image: '@assets/images/main/gameimg.png'
+  },
+  {
+    title: 'Feed The Gods',
+    description: 'Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.',
+    image: '@assets/images/main/gameimg.png'
+  },
 ]);
 
 onMounted(() => {
@@ -48,11 +60,13 @@ onMounted(() => {
       height: '9rem',
       trimSpace: 'move',
       perPage: 3,
-      start: 0, 
+      start: 0,
       pagination: false,
       classes: {
-        pagination: 'splide__pagination your-class-pagination',
-        page: 'splide__pagination__page your-class-page',
+        arrows: 'splide__arrows custom-arrows',
+        arrow: 'splide__arrow custom-arrow',
+        prev: 'splide__arrow--prev custom-prev',
+        next: 'splide__arrow--next custom-next',
       },
       breakpoints: {
         640: {
@@ -60,8 +74,6 @@ onMounted(() => {
         },
       },
     }).mount();
-  } else {
-    console.error('[splide] .splide element not found.');
   }
 });
 </script>
@@ -71,8 +83,6 @@ onMounted(() => {
     <Header />
   </header>
   <main>
-
-    <h1>В ПРОЦЕССЕ</h1>
     <section class="mainTitleBlock">
       <section class="title-wrapper">
         <p class="quote quote-left">"</p>
@@ -93,23 +103,31 @@ onMounted(() => {
             <div class="splide__slide__container">
               <img :src="item.image" alt="News Image">
             </div>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.description }}</p>
+            <h3 class="splideTitle">{{ item.title }}</h3>
+            <p class="splideDescription">{{ item.description }}</p>
           </li>
         </ul>
       </div>
     </section>
 
     <section class="games">
-      <h2>Our games</h2>
-      <div class="game-item" v-for="(game, index) in gameItems" :key="index">
-        <div class="game-image"></div>
-        <h3>{{ game.title }}</h3>
-        <p>{{ game.description }}</p>
-        <p>Available on</p>
-        <button @click="viewGame(index)">Game page</button>
+    <h2 class="titleText">Our <span>games</span></h2>
+    <div class="game-item" v-for="(game, index) in gameItems" :key="index">
+      <div class="game-content">
+        <div class="game-image">
+          <img :src="game.image" alt="Game Image">
+        </div>
+        <div class="game-text">
+          <h3 class="gamesTitle">{{ game.title }}</h3>
+          <p class="gamesDescription">{{ game.description }}</p>
+          <p class="available">Available on</p>
+        </div>
       </div>
-    </section>
+      <button @click="viewGame(index)" class="pageButton">Game page</button>
+    </div>
+  </section>
+
+
   </main>
 
   <footer>
@@ -212,14 +230,32 @@ main {
   padding: 10px;
   border-radius: 5px;
   width: 60%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
 
-  height: 300px;
+.game-content {
+  display: flex;
+  flex: 1;
 }
 
 .game-image {
-  height: 100px;
+  width: 240px;
+  height: 80%;
   background-color: #bbb;
-  margin-bottom: 10px;
+  margin-right: 10px; 
+}
+
+.game-text {
+  flex: 1; 
+}
+
+.pageButton {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
 }
 
 .games {
@@ -231,9 +267,26 @@ main {
   margin-top: 100px;
 }
 
+.games span {
+  color: #FFC851;
+}
+
+.gamesTitle {
+  font-family: Molot;
+  font-size: 36px;
+  letter-spacing: 0.1rem;
+}
+
+.gamesDescription {
+  font-size: 15px;
+  color: #BAB8B8;
+}
+
+
 .splide {
+  position: relative;
   margin: 20px auto;
-  max-width: 800px; 
+  max-width: 1000px; 
   margin-top: 100px;
 }
 
@@ -243,6 +296,7 @@ main {
   color: white;
   text-align: center;
   transition: transform 0.3s;
+  max-width: 500px;
 }
 
 .splide__slide:hover {
@@ -255,19 +309,37 @@ main {
   margin-bottom: 10px; 
 }
 
-.splide__arrow {
-  color: white;
+.custom-arrow {
+  background: transparent;
   border: none;
-  width: 40px;
-  height: 40px;
-  display: flex; 
-  align-items: center;
-  justify-content: center; 
-  padding: 60px;
+  transform: translateY(-50%);
 }
 
-.splide__arrow:hover {
-  background: rgba(255, 255, 255, 0.8);
+.custom-prev {
+  left: -100px !important;
+}
+
+.custom-next {
+  right: -100px !important; 
+}
+
+.splide__arrow--prev {
+  left: 0;
+}
+
+.splide__arrow--next {
+  right: 0;
+}
+
+.splideTitle {
+  font-family: Molot;
+  font-size: 20px;
+  letter-spacing: 0.1rem;
+}
+
+.splideDescription {
+  font-size: 14px;
+  color: #8E8E8E;
 }
 
 @media (max-width: 768px) {

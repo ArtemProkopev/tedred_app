@@ -14,28 +14,22 @@ import Footer from "./Footer.vue";
                 <div class="image">
                     <img src="@assets/images/news/new1.jpg" alt="News Image">
                 </div>
-
                 <div class="content">
                     <p class="main-title"><span>PLAY</span> FEED THE GODS <span>ON STEAM NEXT FEST!</span></p>
-                    
                     <p class="subtitle">Dear Cult Leaders!</p>
-                    <p class="description">The demo version of our chaotic party card battler Feed The Gods is out and available right now!</p>
-                    
+                    <p class="description">The demo version of our chaotic party card battler Feed The Gods is out and available right now!</p>    
                     <button class="cta-button" @click="handlePlayClick">SEE ALL</button>
                 </div>
             </section>
-
             <section class="card">
                 <div class="image">
                     <img src="@assets/images/news/new2.jpg" alt="News Image">
                 </div>
 
                 <div class="content">
-                    <p class="main-title">FEED THE GODS <span>OUT NOW!</span></p>
-                    
+                    <p class="main-title">FEED THE GODS <span>OUT NOW!</span></p>                    
                     <p class="subtitle">Dear Cultists!</p>
                     <p class="description">This day has finally come. Rise to greatness in Feed The Gods! Become a chosen mortal, a daring card-battler who braves the dark halls of forgotten dungeons, faces impossible odds, and earns divine favor by offering their spoils to the ever-hungry gods.</p>
-                    
                     <button class="cta-button" @click="handlePlayClick">SEE ALL</button>
                 </div>
             </section>
@@ -44,13 +38,10 @@ import Footer from "./Footer.vue";
                 <div class="image">
                     <img src="@assets/images/news/new3.jpg" alt="News Image">
                 </div>
-
                 <div class="content">
                     <p class="main-title">FEED THE GODS <span>RELEASE DATE</span></p>
-                    
                     <p class="subtitle">Dear Cultists,</p>
                     <p class="description">The Ancient One stir, hungry for devotion and sacrifice. Feed The Gods emerges from the shadows, summoning you to prove your worth. On Friday The 13, the ritual begins—an easy-to-learn, yet unforgiving card battle experience steeped in the dread of dark dungeons and the echo of haunting chants.</p>
-                    
                     <button class="cta-button" @click="handlePlayClick">SEE ALL</button>
                 </div>
             </section>
@@ -59,13 +50,10 @@ import Footer from "./Footer.vue";
                 <div class="image">
                     <img src="@assets/images/news/new4.jpg" alt="News Image">
                 </div>
-
                 <div class="content">
                     <p class="main-title">DEV DIARY #4 <span>- RELEASE DATE AND FUTURE PLANS!</span></p>
-                    
                     <p class="subtitle">Hello, Cult Leaders!</p>
-                    <p class="description">The playtest has begun! You can conquer the dungeon now until Monday.How to join the Feed The Gods Steam store page starting today, and click "Request Access" under "Join Feed The Gods Playtest" to sign up.</p>
-                    
+                    <p class="description">The playtest has begun! You can conquer the dungeon now until Monday...</p>
                     <button class="cta-button" @click="handlePlayClick">SEE ALL</button>
                 </div>
             </section>
@@ -74,13 +62,10 @@ import Footer from "./Footer.vue";
                 <div class="image">
                     <img src="@assets/images/news/new5.jpg" alt="News Image">
                 </div>
-
                 <div class="content">
-                    <p class="main-title">THE PLAYTESTS <span>STARTS!</span></p>
-                    
+                    <p class="main-title">THE PLAYTESTS <span>STARTS!</span></p> 
                     <p class="subtitle">Dear Cult Leaders!</p>
                     <p class="description">The demo version of our chaotic party card battler Feed The Gods is out and available right now!</p>
-                    
                     <button class="cta-button" @click="handlePlayClick">SEE ALL</button>
                 </div>
             </section>
@@ -96,7 +81,6 @@ import Footer from "./Footer.vue";
 export default {
   methods: {
     handlePlayClick() {
-      // Логика для перехода на страницу игры
       console.log('Redirect to Steam...')
     }
   }
@@ -124,13 +108,13 @@ export default {
     position: relative; 
     display: flex;
     align-items: flex-start;
-    height: 476px;
+    height: 400px;
     padding: 32px;
     background: #1a1a1a;
     color: white;
     margin: 0 auto;
     font-family: 'Arial', sans-serif;
-    width: 80%;
+    width: 70%;
     background-image: url('@assets/images/news/cardback.jpg');
     background-size: cover; 
     background-position: center;
@@ -154,7 +138,7 @@ export default {
 }
 
 .main-title {
-  font-size: 52px;
+  font-size: 45px;
   margin-bottom: 24px;
   line-height: 1.3;
   font-family: Molot;
@@ -165,14 +149,14 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Размещаем элементы с равным пространством */
+    justify-content: space-between;
     gap: 20px;
     text-align: left;
-    height: 100%; /* Устанавливаем высоту контента на 100% */
+    height: 100%; 
 }
 
 .subtitle {
-  font-size: 20px;
+  font-size: 16px;
   margin: 0;
   font-family: Lexend;
 }
@@ -182,7 +166,7 @@ span {
 }
 
 .description {
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.5;
   width: 70%;
   margin: 0;
@@ -190,7 +174,7 @@ span {
 }
 
 .cta-button {
-    align-self: flex-end; /* Устанавливаем кнопку внизу справа */
+    align-self: flex-end; 
     background-image: url('@assets/images/news/button.jpg');
     background-size: cover;
     color: white;
@@ -204,14 +188,13 @@ span {
     text-align: center;
 }
 
-
 .cta-button:hover {
   transform: scale(1.05);
 }
 
 .image {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     overflow: hidden;
     position: relative;
     margin-right: 32px;
@@ -226,5 +209,4 @@ span {
     left: 50%; 
     transform: translate(-50%, -50%);
 }
-
 </style>
