@@ -5,9 +5,9 @@ import { onMounted, ref } from "vue";
 import Footer from "./Footer.vue";
 import Header from "./Header.vue";
 
-import gameimg from "../../assets/images/main/gamescard/gameimg.png";
-import title1 from "../../assets/images/main/gamescard/title1.png";
-import steam from "../../assets/images/steam.svg";
+import gameimg from "/resources/assets/images/main/gamescard/gameimg.png";
+import title1 from "/resources/assets/images/main/gamescard/title1.png";
+import steam from "/resources/assets/images/steam.svg";
 
 const newsItems = ref([
     {
