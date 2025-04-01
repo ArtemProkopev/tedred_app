@@ -71,6 +71,7 @@ onMounted(() => {
             height: "9rem",
             trimSpace: "move",
             perPage: 3,
+            perMove: 1,
             start: 0,
             pagination: false,
             classes: {
@@ -79,9 +80,23 @@ onMounted(() => {
                 prev: "splide__arrow--prev custom-prev",
                 next: "splide__arrow--next custom-next",
             },
+            padding: {
+                left: '100px',
+                right: '100px',
+            },
             breakpoints: {
+                768: {
+                    padding: {
+                        left: '50px',
+                        right: '50px',
+                    },
+                },
                 640: {
                     height: "6rem",
+                    padding: {
+                        left: '30px',
+                        right: '30px',
+                    },
                 },
             },
         }).mount();
@@ -111,22 +126,24 @@ onMounted(() => {
       </section>
 
       <p class="titleText">News</p>
-      <section class="splide" aria-label="Slide Container Example">
-          <div class="splide__track">
-              <ul class="splide__list">
-                  <li
-                      class="splide__slide"
-                      v-for="(item, index) in newsItems"
-                      :key="index"
-                  >
-                      <div class="splide__slide__container">
-                          <img :src="item.image" :alt="item.title" />
-                      </div>
-                      <h3 class="splideTitle">{{ item.title }}</h3>
-                      <p class="splideDescription">{{ item.description }}</p>
-                  </li>
-              </ul>
-          </div>
+      <section class="splide-wrapper">
+          <section class="splide" aria-label="News Slider">
+              <div class="splide__track">
+                  <ul class="splide__list">
+                      <li
+                          class="splide__slide"
+                          v-for="(item, index) in newsItems"
+                          :key="index"
+                      >
+                          <div class="splide__slide__container">
+                              <img :src="item.image" :alt="item.title" />
+                          </div>
+                          <h3 class="splideTitle">{{ item.title }}</h3>
+                          <p class="splideDescription">{{ item.description }}</p>
+                      </li>
+                  </ul>
+              </div>
+          </section>
       </section>
 
       <section class="games">
@@ -158,7 +175,6 @@ onMounted(() => {
       <Footer />
   </footer>
 </template>
-
 
 <style scoped>
 @font-face {
@@ -229,24 +245,17 @@ main {
   text-align: center;
 }
 
-.news-container {
+.games {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px 0;
+  flex-direction: column;
+  gap: 50px;
+  margin-top: 100px;
 }
 
-.news-items {
-  display: flex;
-}
-
-.news-item {
-  background-color: #ccc;
-  margin: 0 10px;
-  padding: 10px;
-  border-radius: 5px;
-  width: 200px;
-  text-align: center;
+.games span {
+  color: #FFC851;
 }
 
 .game-item {
@@ -288,6 +297,11 @@ main {
   flex: 1;
 }
 
+.highPartGame {
+  display: flex;
+  gap: 20px;
+}
+
 .game-image {
   display: flex;
   justify-content: center;
@@ -297,24 +311,6 @@ main {
 
 .game-text {
   flex: 1;
-}
-
-.games {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 50px;
-  margin-top: 100px;
-}
-
-.highPartGame {
-  display: flex;
-  gap: 20px;
-}
-
-.games span {
-  color: #FFC851;
 }
 
 .gamesTitle {
@@ -354,19 +350,56 @@ main {
   transform: scale(1.05);
 }
 
-#seeAll {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  margin-top: 10px;
+/* Новые стили для слайдера */
+.splide-wrapper {
+  position: relative;
+  max-width: 1400px;
+  margin: 100px auto 20px;
+  padding: 0 20px;
 }
 
 .splide {
-  position: relative;
-  margin: 20px auto;
-  max-width: 1000px;
-  margin-top: 100px;
+  position: static;
+  margin: 0 auto;
+}
+
+.custom-arrows {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.custom-arrow {
+  position: static !important;
+  transform: none !important;
+  pointer-events: all;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+}
+
+.custom-arrow:hover {
+  background: rgba(255, 200, 81, 0.3) !important;
+  border-color: #FFC851 !important;
+}
+
+.custom-arrow svg {
+  fill: #fff !important;
+  width: 1.5em !important;
+  height: 1.5em !important;
 }
 
 .splide__slide {
@@ -388,28 +421,6 @@ main {
   margin-bottom: 10px;
 }
 
-.custom-arrow {
-  background: transparent;
-  border: none;
-  transform: translateY(-50%);
-}
-
-.custom-prev {
-  left: -100px !important;
-}
-
-.custom-next {
-  right: -100px !important;
-}
-
-.splide__arrow--prev {
-  left: 0;
-}
-
-.splide__arrow--next {
-  right: 0;
-}
-
 .splideTitle {
   font-family: Molot;
   font-size: 20px;
@@ -422,41 +433,60 @@ main {
 }
 
 @media (max-width: 768px) {
-    .quote {
-        font-size: 64px;
-    }
+  .splide-wrapper {
+    padding: 0 15px;
+  }
+  
+  .custom-arrow {
+    margin: 0 10px;
+    width: 35px !important;
+    height: 35px !important;
+  }
+  
+  .quote {
+    font-size: 64px;
+  }
 
-    .title-wrapper {
-        gap: 10px;
-        flex-direction: column;
-    }
+  .title-wrapper {
+    gap: 10px;
+    flex-direction: column;
+  }
 
-    .game-content {
-        flex-direction: column;
-    }
+  .game-content {
+    flex-direction: column;
+  }
 
-    .game-image {
-        width: 100%;
-        height: 200px;
-    }
+  .game-image {
+    width: 100%;
+    height: 200px;
+  }
 
-    .splide__slide {
-        max-width: 280px;
-    }
+  .splide__slide {
+    max-width: 280px;
+  }
 }
 
 @media (max-width: 480px) {
-    .mainTitleBlock .mainTitleText {
-        font-size: 2rem;
-    }
+  .splide-wrapper {
+    padding: 0 10px;
+  }
+  
+  .custom-arrow {
+    margin: 0 5px;
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .mainTitleBlock .mainTitleText {
+    font-size: 2rem;
+  }
 
-    .titleText {
-        font-size: 48px;
-    }
+  .titleText {
+    font-size: 48px;
+  }
 
-    .gamesTitle {
-        font-size: 28px;
-    }
+  .gamesTitle {
+    font-size: 28px;
+  }
 }
 </style>
-
