@@ -121,6 +121,7 @@ onMounted(() => {
           <h3 class="gamesTitle">{{ game.title }}</h3>
           <p class="gamesDescription">{{ game.description }}</p>
           <p class="available">Available on</p>
+          <img src="@assets/images/main/steam.png">
         </div>
       </div>
       <button @click="viewGame(index)" class="pageButton">Game page</button>
@@ -282,6 +283,9 @@ main {
   color: #BAB8B8;
 }
 
+.available {
+  font-size: 24px;
+}
 
 .splide {
   position: relative;
