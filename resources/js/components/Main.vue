@@ -94,7 +94,6 @@ onMounted(() => {
       <Header />
   </header>
   <main>
-    <p>sssss</p>
       <section class="mainTitleBlock">
           <section class="title-wrapper">
               <p class="quote quote-left">"</p>
@@ -311,7 +310,6 @@ main {
 
 .highPartGame {
   display: flex;
-  flex-direction: row;
   gap: 20px;
 }
 
@@ -349,6 +347,7 @@ main {
     font-family: Molot;
     text-align: center;
     margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 .cta-button:hover {
