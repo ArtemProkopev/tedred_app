@@ -110,6 +110,8 @@ onMounted(() => {
       </div>
     </section>
 
+    <button class="cta-button" id="seeAll" @click="handlePlayClick">See all</button>
+
     <section class="games">
     <h2 class="titleText">Our <span>games</span></h2>
     <div class="game-item" v-for="(game, index) in gameItems" :key="index">
@@ -124,7 +126,7 @@ onMounted(() => {
           <img src="@assets/images/main/steam.png">
         </div>
       </div>
-      <button @click="viewGame(index)" class="pageButton">Game page</button>
+      <button class="cta-button" @click="handlePlayClick">Game page</button>
     </div>
   </section>
 
@@ -285,6 +287,33 @@ main {
 
 .available {
   font-size: 24px;
+}
+
+.cta-button {
+    align-self: flex-end; 
+    background-image: url('@assets/images/news/button.jpg');
+    background-size: cover;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 37px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-family: Molot;
+    text-align: center;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+#seeAll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 10px;
 }
 
 .splide {
