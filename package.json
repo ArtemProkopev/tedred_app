@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "@splidejs/splide": "^4.1.4",
+        "@splidejs/vue-splide": "^0.6.12",
         "@vitejs/plugin-vue": "^5.2.1",
         "vue": "^3.5.13",
         "vue-loader": "^17.3.1",
