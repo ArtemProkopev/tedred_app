@@ -6,6 +6,8 @@ import Footer from "./Footer.vue";
 import Header from "./Header.vue";
 
 import gameimg from "/resources/assets/images/main/gameimg.png";
+import nextarrow from "/resources/assets/images/main/nextarrow.svg";
+import prevarrow from "/resources/assets/images/main/prevarrow.svg";
 import steam from "/resources/assets/images/main/steam.png";
 import title1 from "/resources/assets/images/main/title1.png";
 import title2 from "/resources/assets/images/main/title2.png";
@@ -118,15 +120,7 @@ onMounted(() => {
 
         <div class="slider-container">
             <button class="custom-arrow custom-prev">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="white"
-                >
-                    <path
-                        d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
-                    />
-                </svg>
+                <img :src="prevarrow" alt="" />
             </button>
 
             <section class="splide" aria-label="News slider">
@@ -150,15 +144,7 @@ onMounted(() => {
             </section>
 
             <button class="custom-arrow custom-next">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="white"
-                >
-                    <path
-                        d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
-                    />
-                </svg>
+                <img :src="nextarrow" alt="" />
             </button>
         </div>
 
@@ -405,8 +391,11 @@ main {
 }
 
 .splideTitle {
-    font-size: 1.2rem;
+    font-family: Molot;
+    letter-spacing: 0.1rem;
+    font-size: 1.5rem;
     margin-bottom: 0.5rem;
+    margin-top: 40px;
 }
 
 .splideDescription {
@@ -415,8 +404,8 @@ main {
 }
 
 .custom-arrow {
-    background: rgba(255, 200, 81, 0.2);
-    border: 2px solid #ffc851;
+    background: rgba(255, 200, 81, 0);
+    border: none;
     color: white;
     width: 50px;
     height: 50px;
@@ -431,8 +420,7 @@ main {
 }
 
 .custom-arrow:hover {
-    background: rgba(255, 200, 81, 0.4);
-    transform: scale(1.1);
+    transform: scale(1.5);
 }
 
 .custom-arrow svg {
