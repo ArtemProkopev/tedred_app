@@ -6,10 +6,10 @@ import Footer from "./Footer.vue";
 import Header from "./Header.vue";
 
 import gameimg from "/resources/assets/images/main/gameimg.png";
+import steam from "/resources/assets/images/main/steam.png";
 import title1 from "/resources/assets/images/main/title1.png";
 import title2 from "/resources/assets/images/main/title2.png";
 import title3 from "/resources/assets/images/main/title3.png";
-import steam from "/resources/assets/images/main/steam.png";
 
 const newsItems = ref([
     {
@@ -65,115 +65,135 @@ const gameItems = ref([
 
 onMounted(() => {
     const splideElement = document.querySelector(".splide");
+
     if (splideElement) {
-        new Splide(splideElement, {
+        const splide = new Splide(splideElement, {
             type: "loop",
             height: "9rem",
             trimSpace: "move",
             perPage: 3,
-            perMove: 1,
             start: 0,
             pagination: false,
-            classes: {
-                arrows: "splide__arrows custom-arrows",
-                arrow: "splide__arrow custom-arrow",
-                prev: "splide__arrow--prev custom-prev",
-                next: "splide__arrow--next custom-next",
-            },
-            padding: {
-                left: '100px',
-                right: '100px',
-            },
+            arrows: false,
             breakpoints: {
-                768: {
-                    padding: {
-                        left: '50px',
-                        right: '50px',
-                    },
-                },
                 640: {
                     height: "6rem",
-                    padding: {
-                        left: '30px',
-                        right: '30px',
-                    },
                 },
             },
         }).mount();
+
+        document
+            .querySelector(".custom-prev")
+            ?.addEventListener("click", () => splide.go("<"));
+        document
+            .querySelector(".custom-next")
+            ?.addEventListener("click", () => splide.go(">"));
     }
 });
 </script>
 
 <template>
-  <header>
-      <Header />
-  </header>
-  <main>
-      <section class="mainTitleBlock">
-          <section class="title-wrapper">
-              <p class="quote quote-left">"</p>
-              <div class="title-content">
-                  <p class="mainTitleText">
-                      <span>TedRed</span> is a small developer with big ambitions
-                  </p>
-                  <p class="supportMainTitleText">
-                      We make games that spark your imagination like the games
-                      you played as a kid.
-                  </p>
-              </div>
-              <p class="quote quote-right">"</p>
-          </section>
-      </section>
+    <header>
+        <Header />
+    </header>
+    <main>
+        <section class="mainTitleBlock">
+            <section class="title-wrapper">
+                <p class="quote quote-left">"</p>
+                <div class="title-content">
+                    <p class="mainTitleText">
+                        <span>TedRed</span> is a small developer with big
+                        ambitions
+                    </p>
+                    <p class="supportMainTitleText">
+                        We make games that spark your imagination like the games
+                        you played as a kid.
+                    </p>
+                </div>
+                <p class="quote quote-right">"</p>
+            </section>
+        </section>
 
-      <p class="titleText">News</p>
-      <section class="splide-wrapper">
-          <section class="splide" aria-label="News Slider">
-              <div class="splide__track">
-                  <ul class="splide__list">
-                      <li
-                          class="splide__slide"
-                          v-for="(item, index) in newsItems"
-                          :key="index"
-                      >
-                          <div class="splide__slide__container">
-                              <img :src="item.image" :alt="item.title" />
-                          </div>
-                          <h3 class="splideTitle">{{ item.title }}</h3>
-                          <p class="splideDescription">{{ item.description }}</p>
-                      </li>
-                  </ul>
-              </div>
-          </section>
-      </section>
+        <p class="titleText">News</p>
 
-      <section class="games">
-          <h2 class="titleText">Our <span>games</span></h2>
-          <div
-              class="game-item"
-              v-for="(game, index) in gameItems"
-              :key="index"
-          >
-              <section class="game-content">
-                <section class="highPartGame">
-                  <div class="game-image">
-                      <img :src="game.image" :alt="game.title" />
-                  </div>
-                  <div class="game-text">
-                      <h3 class="gamesTitle">{{ game.title }}</h3>
-                      <p class="gamesDescription">{{ game.description }}</p>
-                      <p class="available">Available on</p>
-                      <img :src="steam" alt="Steam" class="steam-logo" />
-                  </div>
+        <div class="slider-container">
+            <button class="custom-arrow custom-prev">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                >
+                    <path
+                        d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
+                    />
+                </svg>
+            </button>
+
+            <section class="splide" aria-label="News slider">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li
+                            class="splide__slide"
+                            v-for="(item, index) in newsItems"
+                            :key="index"
+                        >
+                            <div class="splide__slide__container">
+                                <img :src="item.image" :alt="item.title" />
+                            </div>
+                            <h3 class="splideTitle">{{ item.title }}</h3>
+                            <p class="splideDescription">
+                                {{ item.description }}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <button class="custom-arrow custom-next">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                >
+                    <path
+                        d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+                    />
+                </svg>
+            </button>
+        </div>
+
+        <section class="games">
+            <h2 class="titleText">Our <span>games</span></h2>
+            <div
+                class="game-item"
+                v-for="(game, index) in gameItems"
+                :key="index"
+            >
+                <section class="game-content">
+                    <section class="highPartGame">
+                        <div class="game-image">
+                            <img :src="game.image" :alt="game.title" />
+                        </div>
+                        <div class="game-text">
+                            <h3 class="gamesTitle">{{ game.title }}</h3>
+                            <p class="gamesDescription">
+                                {{ game.description }}
+                            </p>
+                            <p class="available">Available on</p>
+                            <img :src="steam" alt="Steam" class="steam-logo" />
+                        </div>
+                    </section>
+                    <button class="cta-button" @click="handlePlayClick">
+                        Game page
+                    </button>
                 </section>
-                  <button class="cta-button" @click="handlePlayClick">Game page</button>
-              </section>
-          </div>
-      </section>
-  </main>
+            </div>
+        </section>
+    </main>
 
-  <footer>
-      <Footer />
-  </footer>
+    <footer>
+        <Footer />
+    </footer>
 </template>
 
 <style scoped>
@@ -193,90 +213,90 @@ main {
 }
 
 .mainTitleBlock {
-  text-align: center;
-  margin-top: 8%;
-  position: relative;
+    text-align: center;
+    margin-top: 8%;
+    position: relative;
 }
 
 .title-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
 .mainTitleBlock .mainTitleText {
-  font-size: 2.7rem;
-  font-family: Molot;
-  margin: 0;
+    font-size: 2.7rem;
+    font-family: Molot;
+    margin: 0;
 }
 
 .mainTitleBlock .mainTitleText span {
-  color: #FFC851;
+    color: #ffc851;
 }
 
 .mainTitleBlock .supportMainTitleText {
-  font-size: 1.2rem;
-  color: #8F8F8F;
+    font-size: 1.2rem;
+    color: #8f8f8f;
 }
 
 .quote {
-  font-size: 128px;
-  color: #AFAFAF;
-  line-height: 0.5;
-  margin: 0;
+    font-size: 128px;
+    color: #afafaf;
+    line-height: 0.5;
+    margin: 0;
 }
 
 .quote-left {
-  float: left;
-  margin-right: 10px;
-  margin-bottom: 50px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 50px;
 }
 
 .quote-right {
-  float: right;
-  margin-left: 10px;
-  margin-top: 100px;
+    float: right;
+    margin-left: 10px;
+    margin-top: 100px;
 }
 
 .titleText {
-  font-family: Molot;
-  font-size: 64px;
-  text-align: center;
+    font-family: Molot;
+    font-size: 64px;
+    text-align: center;
 }
 
 .games {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 50px;
-  margin-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 100px;
 }
 
 .games span {
-  color: #FFC851;
+    color: #ffc851;
 }
 
 .game-item {
-  background-color: #ccc;
-  margin: 0 10px;
-  padding: 10px;
-  border-radius: 5px;
-  width: 60%;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  background: #1a1a1a;
-  background-image: url('@assets/images/news/cardback.jpg');
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.616);
+    background-color: #ccc;
+    margin: 0 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 60%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #1a1a1a;
+    background-image: url("@assets/images/news/cardback.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.616);
 }
 
 .game-item::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -292,46 +312,46 @@ main {
 }
 
 .game-content {
-  display: flex;
-  align-items: center;
-  flex: 1;
+    display: flex;
+    align-items: center;
+    flex: 1;
 }
 
 .highPartGame {
-  display: flex;
-  gap: 20px;
+    display: flex;
+    gap: 20px;
 }
 
 .game-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 }
 
 .game-text {
-  flex: 1;
+    flex: 1;
 }
 
 .gamesTitle {
-  font-family: Molot;
-  font-size: 36px;
-  letter-spacing: 0.1rem;
+    font-family: Molot;
+    font-size: 36px;
+    letter-spacing: 0.1rem;
 }
 
 .gamesDescription {
-  font-size: 15px;
-  color: #BAB8B8;
-  width: 400px;
+    font-size: 15px;
+    color: #bab8b8;
+    width: 400px;
 }
 
 .available {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .cta-button {
     align-self: flex-end;
-    background-image: url('@assets/images/news/button.jpg');
+    background-image: url("@assets/images/news/button.jpg");
     background-size: cover;
     color: white;
     border: none;
@@ -347,146 +367,140 @@ main {
 }
 
 .cta-button:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
-/* Новые стили для слайдера */
-.splide-wrapper {
-  position: relative;
-  max-width: 1400px;
-  margin: 100px auto 20px;
-  padding: 0 20px;
+/* Стили для слайдера */
+.slider-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 100px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 
 .splide {
-  position: static;
-  margin: 0 auto;
-}
-
-.custom-arrows {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.custom-arrow {
-  position: static !important;
-  transform: none !important;
-  pointer-events: all;
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  width: 40px !important;
-  height: 40px !important;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 20px;
-}
-
-.custom-arrow:hover {
-  background: rgba(255, 200, 81, 0.3) !important;
-  border-color: #FFC851 !important;
-}
-
-.custom-arrow svg {
-  fill: #fff !important;
-  width: 1.5em !important;
-  height: 1.5em !important;
+    width: 100%;
+    flex: 1;
+    margin: 0 auto;
 }
 
 .splide__slide {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  color: white;
-  text-align: center;
-  transition: transform 0.3s;
-  max-width: 500px;
-}
-
-.splide__slide:hover {
-  transform: scale(1.05);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    color: white;
+    text-align: center;
+    transition: transform 0.3s;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .splide__slide img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .splideTitle {
-  font-family: Molot;
-  font-size: 20px;
-  letter-spacing: 0.1rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .splideDescription {
-  font-size: 14px;
-  color: #8E8E8E;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.custom-arrow {
+    background: rgba(255, 200, 81, 0.2);
+    border: 2px solid #ffc851;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.custom-arrow:hover {
+    background: rgba(255, 200, 81, 0.4);
+    transform: scale(1.1);
+}
+
+.custom-arrow svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Адаптивные стили */
+@media (max-width: 1100px) {
+    .slider-container {
+        max-width: 90%;
+    }
 }
 
 @media (max-width: 768px) {
-  .splide-wrapper {
-    padding: 0 15px;
-  }
-  
-  .custom-arrow {
-    margin: 0 10px;
-    width: 35px !important;
-    height: 35px !important;
-  }
-  
-  .quote {
-    font-size: 64px;
-  }
+    .slider-container {
+        margin: 50px auto;
+    }
 
-  .title-wrapper {
-    gap: 10px;
-    flex-direction: column;
-  }
+    .custom-arrow {
+        width: 40px;
+        height: 40px;
+    }
 
-  .game-content {
-    flex-direction: column;
-  }
+    .quote {
+        font-size: 64px;
+    }
 
-  .game-image {
-    width: 100%;
-    height: 200px;
-  }
+    .title-wrapper {
+        gap: 10px;
+        flex-direction: column;
+    }
 
-  .splide__slide {
-    max-width: 280px;
-  }
+    .game-content {
+        flex-direction: column;
+    }
+
+    .game-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .splide__slide {
+        padding: 15px;
+    }
 }
 
 @media (max-width: 480px) {
-  .splide-wrapper {
-    padding: 0 10px;
-  }
-  
-  .custom-arrow {
-    margin: 0 5px;
-    width: 30px !important;
-    height: 30px !important;
-  }
-  
-  .mainTitleBlock .mainTitleText {
-    font-size: 2rem;
-  }
+    .custom-arrow {
+        width: 35px;
+        height: 35px;
+    }
 
-  .titleText {
-    font-size: 48px;
-  }
+    .mainTitleBlock .mainTitleText {
+        font-size: 2rem;
+    }
 
-  .gamesTitle {
-    font-size: 28px;
-  }
+    .titleText {
+        font-size: 48px;
+    }
+
+    .gamesTitle {
+        font-size: 28px;
+    }
+
+    .custom-arrow svg {
+        width: 20px;
+        height: 20px;
+    }
 }
 </style>
