@@ -8,7 +8,6 @@
                 <ul>
                     <li><router-link to="/">home</router-link></li>
                     <li><router-link to="/news">news</router-link></li>
-                    <li><a href="#games">games</a></li>
                     <li><a href="#team">team</a></li>
                     <li><a href="#about">about us</a></li>
                     <li><router-link to="/contact">contact</router-link></li>

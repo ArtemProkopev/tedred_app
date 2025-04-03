@@ -169,9 +169,9 @@ onMounted(() => {
                             <img :src="steam" alt="Steam" class="steam-logo" />
                         </div>
                     </section>
-                    <button class="cta-button" @click="handlePlayClick">
-                        Game page
-                    </button>
+                    <router-link to="/gamepage"><button class="cta-button" @click="handlePlayClick">
+                      Game page
+                    </button></router-link>
                 </section>
             </div>
         </section>

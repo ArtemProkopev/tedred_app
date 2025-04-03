@@ -1,11 +1,11 @@
 <script setup>
-import NewsHeader from "./NewsHeader.vue";
+import Header from "./Header.vue";
 import Footer from "./Footer.vue";
 </script>
 
 <template>
     <header>
-        <NewsHeader />
+        <Header />
     </header>
 
     <main>
