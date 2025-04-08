@@ -1,3 +1,97 @@
+<template>
+    <header>
+        <Header />
+    </header>
+    <main>
+        <section class="mainTitleBlock">
+            <section class="title-wrapper">
+                <p class="quote quote-left">"</p>
+                <div class="title-content">
+                    <p class="mainTitleText">
+                        <span>TedRed</span> is a small developer with big
+                        ambitions
+                    </p>
+                    <p class="supportMainTitleText">
+                        We make games that spark your imagination like the games
+                        you played as a kid.
+                    </p>
+                </div>
+                <p class="quote quote-right">"</p>
+            </section>
+        </section>
+
+        <p class="titleText">News</p>
+
+        <div class="slider-container">
+            <button class="custom-arrow custom-prev">
+                <img :src="prevarrow" alt="" />
+            </button>
+
+            <section class="splide" aria-label="News slider">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li
+                            class="splide__slide"
+                            v-for="(item, index) in newsItems"
+                            :key="index"
+                        >
+                            <div class="splide__slide__container">
+                                <img :src="item.image" :alt="item.title" />
+                            </div>
+                            <h3 class="splideTitle">{{ item.title }}</h3>
+                            <p class="splideDescription">
+                                {{ item.description }}
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <button class="custom-arrow custom-next">
+                <img :src="nextarrow" alt="" />
+            </button>
+        </div>
+
+        <section class="games">
+            <h2 class="titleText">Our <span>games</span></h2>
+            <div
+                class="game-item"
+                v-for="(game, index) in gameItems"
+                :key="index"
+            >
+                <section class="game-content">
+                    <section class="highPartGame">
+                        <div class="game-image">
+                            <div class="image-container">
+                                <img :src="game.image" :alt="game.title" />
+                            </div>
+                        </div>
+                        <div class="game-text">
+                            <h3 class="gamesTitle">{{ game.title }}</h3>
+                            <p class="gamesDescription">
+                                {{ game.description }}
+                            </p>
+                            <p class="available">Available on</p>
+                            <img :src="steam" alt="Steam" class="steam-logo" />
+                            <div class="button-container">
+                                <router-link to="/gamepage">
+                                    <button class="cta-button" @click="handlePlayClick">
+                                        Game page
+                                    </button>
+                                </router-link>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <Footer />
+    </footer>
+</template>
+
 <script setup>
 import { Splide } from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
@@ -93,94 +187,6 @@ onMounted(() => {
     }
 });
 </script>
-
-<template>
-    <header>
-        <Header />
-    </header>
-    <main>
-        <section class="mainTitleBlock">
-            <section class="title-wrapper">
-                <p class="quote quote-left">"</p>
-                <div class="title-content">
-                    <p class="mainTitleText">
-                        <span>TedRed</span> is a small developer with big
-                        ambitions
-                    </p>
-                    <p class="supportMainTitleText">
-                        We make games that spark your imagination like the games
-                        you played as a kid.
-                    </p>
-                </div>
-                <p class="quote quote-right">"</p>
-            </section>
-        </section>
-
-        <p class="titleText">News</p>
-
-        <div class="slider-container">
-            <button class="custom-arrow custom-prev">
-                <img :src="prevarrow" alt="" />
-            </button>
-
-            <section class="splide" aria-label="News slider">
-                <div class="splide__track">
-                    <ul class="splide__list">
-                        <li
-                            class="splide__slide"
-                            v-for="(item, index) in newsItems"
-                            :key="index"
-                        >
-                            <div class="splide__slide__container">
-                                <img :src="item.image" :alt="item.title" />
-                            </div>
-                            <h3 class="splideTitle">{{ item.title }}</h3>
-                            <p class="splideDescription">
-                                {{ item.description }}
-                            </p>
-                        </li>
-                    </ul>
-                </div>
-            </section>
-
-            <button class="custom-arrow custom-next">
-                <img :src="nextarrow" alt="" />
-            </button>
-        </div>
-
-        <section class="games">
-            <h2 class="titleText">Our <span>games</span></h2>
-            <div
-                class="game-item"
-                v-for="(game, index) in gameItems"
-                :key="index"
-            >
-                <section class="game-content">
-                    <section class="highPartGame">
-                        <div class="game-image">
-                            <img :src="game.image" :alt="game.title" />
-                        </div>
-                        <div class="game-text">
-                            <h3 class="gamesTitle">{{ game.title }}</h3>
-                            <p class="gamesDescription">
-                                {{ game.description }}
-                            </p>
-                            <p class="available">Available on</p>
-                            <img :src="steam" alt="Steam" class="steam-logo" />
-                        </div>
-                    </section>
-                    <router-link to="/gamepage"><button class="cta-button" @click="handlePlayClick">
-                      Game page
-                    </button></router-link>
-                </section>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <Footer />
-    </footer>
-</template>
 
 <style scoped>
 @font-face {
@@ -299,44 +305,78 @@ main {
 
 .game-content {
     display: flex;
-    align-items: center;
-    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
 }
 
 .highPartGame {
     display: flex;
     gap: 20px;
+    flex: 1;
 }
 
 .game-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+    width: 255px;
+    height: 350px;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.image-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 5px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .game-text {
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .gamesTitle {
     font-family: Molot;
     font-size: 36px;
     letter-spacing: 0.1rem;
+    margin: 0;
 }
 
 .gamesDescription {
-    font-size: 15px;
+    font-size: 13px;
     color: #bab8b8;
     width: 400px;
+    margin-bottom: auto;
 }
 
 .available {
     font-size: 24px;
+    margin: 0;
+    padding: 0 0 10px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    padding: 10px 0;
+}
+
+.steam-logo {
+    width: 137px;
+    height: 46px;
+    cursor: pointer;
 }
 
 .cta-button {
-    align-self: flex-end;
     background-image: url("@assets/images/news/button.jpg");
     background-size: cover;
     color: white;
@@ -348,8 +388,6 @@ main {
     transition: transform 0.2s;
     font-family: Molot;
     text-align: center;
-    margin-bottom: 10px;
-    margin-right: 10px;
 }
 
 .cta-button:hover {
@@ -455,16 +493,31 @@ main {
     }
 
     .game-content {
+        padding: 15px;
+    }
+    
+    .highPartGame {
         flex-direction: column;
     }
 
     .game-image {
         width: 100%;
         height: 200px;
+        margin-right: 0;
+        margin-bottom: 20px;
     }
-
-    .splide__slide {
-        padding: 15px;
+    
+    .gamesDescription {
+        width: 100%;
+    }
+    
+    .button-container {
+        justify-content: center;
+        padding: 10px 0 0;
+    }
+    
+    .cta-button {
+        width: 100%;
     }
 }
 
