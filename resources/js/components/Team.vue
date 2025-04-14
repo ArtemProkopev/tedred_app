@@ -99,28 +99,42 @@ export default {
     src: url("@assets/fonts/LexendExa-Regular.woff");
 }
 
+main {
+  flex: 1;
+}
+
+footer {
+  position: relative;
+  width: 100%;
+}
+
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 100px;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: calc(100vh - 200px);
 }
 
 .card {
-  position: relative; /* Добавлено для корректного позиционирования псевдоэлемента */
+  position: relative;
   background: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 25px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  aspect-ratio: 436/519; /* Maintain original proportion */
+  aspect-ratio: 1/1.1;
   transition: transform 0.2s;
-  margin: 0 auto;
   background-image: url('@assets/images/news/cardback.jpg');
   background-size: cover; 
   background-position: center;
+  width: 100%;
+  box-sizing: border-box;
+  max-height: 400px;
+  overflow: hidden;
 }
 
 .card::before {
@@ -142,88 +156,123 @@ export default {
 .card-header {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .avatar-circle {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
     border-radius: 50%;
     background-color: #e0e0e0;
-    background-size: cover; /* Обеспечивает правильное отображение изображения */
-    background-position: center; /* Центрирует изображение */
-    margin-right: 15px;
+    background-size: cover;
+    background-position: center;
+    margin-right: 12px;
 }
 
 .name-role h3 {
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: white;
     font-family: Molot;
     letter-spacing: 0.1rem;
+    word-break: break-word;
 }
 
 .role {
-    margin: 5px 0 0;
-    font-size: 12px;
+    margin: 3px 0 0;
+    font-size: 0.7rem;
     color: #B0B0B0;
     font-family: Lexend;
 }
 
 .card-content {
     flex-grow: 1;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #B0B0B0;
-    line-height: 1.5;
+    line-height: 1.4;
     font-family: Lexend;
-    font-size: 13px;
+    font-size: 0.75rem;
+    overflow-y: auto;
+    word-break: break-word;
+    padding-right: 5px;
+}
+
+.card-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.card-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card-content::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 2px;
+}
+
+.card-content::-webkit-scrollbar-thumb:hover {
+    background: #888;
 }
 
 .card-footer {
     margin-top: auto;
     color: #B0B0B0;
     font-family: Lexend;
-    font-size: 12px;
+    font-size: 0.7rem;
+    padding-top: 8px;
 }
 
 .favorite-games-label {
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 3px;
     color: white;
     font-family: Molot;
     letter-spacing: 0.1rem;
-    font-size: 20px;
-}
-
-ul {
-    padding-left: 20px;
-    margin: 0;
-    color: #B0B0B0;
-    font-family: Lexend;
-}
-
-li {
-    margin-bottom: 5px;
+    font-size: 0.9rem;
 }
 
 /* Responsive adjustments */
-@media (min-width: 768px) {
+@media (max-width: 767px) {
     .cards-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 15px;
     }
     
     .card {
-        min-height: 0; /* Allow cards to shrink */
+        padding: 12px;
+        aspect-ratio: unset;
+        height: auto;
+        min-height: 200px;
+        max-height: none;
     }
+    
+    .avatar-circle {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .cards-container {
+    max-width: 800px;
+  }
 }
 
 @media (min-width: 1200px) {
-    .card {
-        max-width: 436px;
-        max-height: 519px;
+    .cards-container {
+        padding: 30px;
+        gap: 30px;
+    }
+}
+
+/* Hover effects for non-touch devices */
+@media (hover: hover) {
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 }
 </style>
-
-
-   

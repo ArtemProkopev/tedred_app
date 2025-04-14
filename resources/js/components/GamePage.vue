@@ -29,15 +29,15 @@ import gamegif from "/resources/assets/images/gamepage/gamegif.gif";
                 </div>
             </section>
             <section class="secondInfo">
-                <img :src="gamegif" alt="Game Gif" />
-                <p class="quote quote-left">“</p>
+                <img :src="gamegif" alt="Game Gif" class="game-gif" />
+                <p class="quote quote-left">"</p>
                 <div class="content">
                     <h2 class="subtitle">DIVE INTO THE DARKNESS OF<br>THE TOWER OF BLACK FATE</h2>
                     <p class="textDescription">
                         Use the cards to help your devoted servant survive. And the rest - send their stupid accomplices to the very bottom of the pit!
                     </p>
                 </div>
-                <p class="quote quote-right">”</p>
+                <p class="quote quote-right">"</p>
                 <h2 class="title">WELL, MOST IMPORTANTLY... <span>FEED THE GODS!</span></h2>
             </section>
         </section>
@@ -92,41 +92,40 @@ import gamegif from "/resources/assets/images/gamepage/gamegif.gif";
         <section class="allReviews">
             <section class="reviewsSection">
                 <div class="left-section">
-                <div class="avatar-circle"></div>
-                <p class="name">Name TwoName</p>
+                    <div class="avatar-circle"></div>
+                    <p class="name">Name TwoName</p>
                 </div>
                 <div class="right-section">
-                <p class="review-text">
-                    I recently dove into the enchanting world of "Elysium Chronicles," and I must say, 
-                    it has been an unforgettable experience! From the moment I launched the game, 
-                    I was greeted with breathtaking visuals that transported me to a vibrant realm 
-                    filled with lush forests, towering mountains, and shimmering lakes. 
-                    The attention to detail is astounding; every leaf rustling in the wind feels alive!
-                </p>
+                    <p class="review-text">
+                        I recently dove into the enchanting world of "Elysium Chronicles," and I must say, 
+                        it has been an unforgettable experience! From the moment I launched the game, 
+                        I was greeted with breathtaking visuals that transported me to a vibrant realm 
+                        filled with lush forests, towering mountains, and shimmering lakes. 
+                        The attention to detail is astounding; every leaf rustling in the wind feels alive!
+                    </p>
                 </div>
             </section>
 
             <section class="reviewsSection">
                 <div class="left-section">
-                <div class="avatar-circle"></div>
-                <p class="name">Name TwoName</p>
+                    <div class="avatar-circle"></div>
+                    <p class="name">Name TwoName</p>
                 </div>
                 <div class="right-section">
-                <p class="review-text">
-                    I recently dove into the enchanting world of "Elysium Chronicles," and I must say, 
-                    it has been an unforgettable experience! From the moment I launched the game, 
-                    I was greeted with breathtaking visuals that transported me to a vibrant realm 
-                    filled with lush forests, towering mountains, and shimmering lakes. 
-                    The attention to detail is astounding; every leaf rustling in the wind feels alive!
-                </p>
+                    <p class="review-text">
+                        I recently dove into the enchanting world of "Elysium Chronicles," and I must say, 
+                        it has been an unforgettable experience! From the moment I launched the game, 
+                        I was greeted with breathtaking visuals that transported me to a vibrant realm 
+                        filled with lush forests, towering mountains, and shimmering lakes. 
+                        The attention to detail is astounding; every leaf rustling in the wind feels alive!
+                    </p>
                 </div>
             </section>
-
         </section>
 
         <section class="steam">
             <h2 class="subtitle">You can purchase it now on Steam!</h2>
-            <img :src="steam">
+            <img :src="steam" class="steam-image">
         </section>
     </main>
 
@@ -224,17 +223,18 @@ export default {
   color: rgb(255, 255, 255);
   font-family: Molot;
   letter-spacing: 0.1rem;
+  margin: 0;
 }
 
 .subtitle {
   font-size: 32px;
   font-family: Molot;
   color: white;
-  text-align: center;
 }
 
 #reviews {
     margin-top: 100px;
+    text-align: center;
 }
 
 .gallery {
@@ -243,6 +243,7 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     padding: 10px 0;
+    min-height: 100%;
 }
 
 .galleryTitle {
@@ -255,11 +256,19 @@ export default {
 
 .textDescription {
     color: #8f8f8f;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .game-image {
   height: auto;
   margin: 20px 0;
+  max-width: 100%;
+}
+
+.game-gif {
+  max-width: 100%;
+  height: auto;
 }
 
 .firstInfo {
@@ -268,7 +277,8 @@ export default {
     align-items: center;
     justify-content: center; 
     margin: 0 auto;
-    max-width: 55%;
+    max-width: 90%;
+    padding: 20px 0;
 }
 
 span {
@@ -278,11 +288,12 @@ span {
 .game-description {
     text-align: left; 
     margin-left: 20px; 
+    width: 40%
 }
 
 .secondInfo {
     position: relative;
-    max-width: 60%;
+    max-width: 90%;
     margin: 0 auto;
     padding: 40px 0;
 }
@@ -293,6 +304,7 @@ span {
     line-height: 1;
     margin: 0;
     position: absolute;
+    display: none; 
 }
 
 .quote-left {
@@ -417,32 +429,43 @@ span {
     margin: 0 auto;
     flex-direction: column;
     margin-top: 50px;
+    padding: 0 20px;
 }
 
-.steam img {
+.steam-image {
+    max-width: 100%;
+    height: auto;
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.steam-image:hover {
+    transform: scale(1.02);
 }
 
 .reviewsSection {
-  width: 1000px;
-  height: 200px;
+  max-width: 1000px;
+  width: 90%;
+  min-height: 200px;
   display: flex;
   align-items: center;
   margin: 0 auto;
-  gap: 30px;
+  gap: 20px;
   padding: 20px;
   background-image: url("@assets/images/gamepage/reviewsback.png");
   background-size: cover;
   background-position: center;
   color: white;
   font-family: Lexend;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 .left-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .avatar-circle {
@@ -453,6 +476,7 @@ span {
   margin-bottom: 10px;
   background-image: url("@assets/images/logo.png");
   background-position: center;
+  background-size: cover;
 }
 
 .name {
@@ -478,5 +502,193 @@ span {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding: 0 20px;
+    margin-bottom: 50px;
+}
+
+@media (max-width: 1024px) {
+    .firstInfo {
+        max-width: 95%;
+    }
+    
+    .secondInfo {
+        max-width: 95%;
+    }
+    
+    .image-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 180px);
+    }
+
+    .slider-container {
+        padding: 0 30px;
+    }
+    
+    .quote {
+        font-size: 80px;
+    }
+    
+    .quote-left {
+        left: -30px;
+    }
+    
+    .quote-right {
+        right: -30px;
+    }
+    
+    .game-description {
+        width: 50%;
+    }
+}
+
+@media (max-width: 768px) {
+    .firstInfo {
+        flex-direction: column;
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    .game-description {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    
+    .title {
+        font-size: 32px;
+    }
+    
+    .subtitle {
+        font-size: 24px;
+    }
+    
+    .secondInfo {
+        padding: 20px 15px;
+    }
+    
+    .content {
+        padding: 0 15px;
+    }
+    
+    .image-grid {
+        grid-template-columns: 1fr;
+        height: 400px;
+    }
+    
+    .slider-container {
+        padding: 0 30px;
+    }
+    
+    .reviewsSection {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .review-text {
+        text-align: center;
+    }
+    
+    .quote {
+        display: none;
+    }
+
+    .gallery {
+        background-size: cover; 
+        background-position: center; 
+        width: 100%; 
+        min-height: 100%;
+        padding: 20px 0;
+        background-image: none;
+    }
+
+    .slide {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 150px);
+    }
+
+    .slider-container {
+        width: 100%; 
+        padding: 0; 
+    }
+
+    .slider-inner {
+        display: flex; 
+    }
+
+    .slide {
+        flex-shrink: 0; 
+        width: 100%; 
+    }
+}
+
+@media (max-width: 480px) {
+    .slide {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 150px);
+    }
+
+    .image-grid {
+        grid-template-rows: repeat(2, 150px);
+    }
+
+    .slider-container {
+        padding: 0 20px;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+    
+    .subtitle {
+        font-size: 20px;
+    }
+    
+    .textDescription {
+        font-size: 14px;
+    }
+    
+    .galleryTitle {
+        font-size: 22px;
+    }
+    
+    .image-grid {
+        height: 300px;
+    }
+    
+    .slider-button {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .slider-button img {
+        width: 15px;
+        height: 15px;
+    }
+    
+    #reviews {
+        margin-top: 50px;
+    }
+    .gallery {
+        background-size: cover; 
+        background-position: center; 
+        width: 100%; 
+        min-height: 100%;
+        padding: 20px 0;
+        background-image: none;
+    }
+
+    .slider-container {
+        width: 100%; 
+        padding: 0; 
+    }
+
+    .slider-inner {
+        display: flex; 
+    }
+
+    .slide {
+        flex-shrink: 0; 
+        width: 100%; 
+    }
 }
 </style>

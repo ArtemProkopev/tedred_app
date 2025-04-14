@@ -12,14 +12,27 @@ import { RouterView } from "vue-router";
 
 <style scoped>
 main {
+    background-position: left center; 
     display: block;
-    align-items: center;
-    justify-content: center;
+    min-height: 100vh;
     background-color: black;
     background-image: url("@assets/images/back.png");
     background-attachment: fixed;
-    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: left center;
+    background-size: cover;
+}
+
+@media (min-aspect-ratio: 16/9) {
+    main {
+        background-position: center center;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        background-size: 150% auto;
+        background-position: left center;
+    }
 }
 </style>

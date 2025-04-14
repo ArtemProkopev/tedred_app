@@ -104,7 +104,7 @@ h1 {
     color: white;
     font-family: Lexend;
     transition: color 0.3s;
-    font-size: clamp(10px, 2vw, 16px); /* Добавлен clamp */
+    font-size: clamp(10px, 2vw, 12px);
 }
 
 .navigation a:hover {

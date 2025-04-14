@@ -94,8 +94,7 @@ import Footer from "./Footer.vue";
             <div v-if="statusMessage" :class="statusClass" class="statusMessage">
                 {{ statusMessage }}
             </div>
-
-            </article>
+        </article>
     </main>
 
     <footer>
@@ -160,8 +159,16 @@ export default {
     font-family: Molot;
     src: url("@assets/fonts/Molot.woff");
 }
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 main {
     display: block;
+    padding: 0 15px;
 }
 
 .statusMessage {
@@ -189,9 +196,13 @@ main {
 
 .contactFormMain {
     background-image: url("@assets/images/image (2).png");
+    background-size: cover;
+    background-position: center;
     padding: 20px;
-    width: 60%;
+    width: 100%;
+    max-width: 800px;
     margin: 0 auto;
+    border-radius: 8px;
 }
 
 .secondText {
@@ -200,22 +211,29 @@ main {
     font-family: Lexend;
     margin-top: 30px;
     font-size: 12px;
+    line-height: 1.6;
 }
 
 label {
     color: white;
+    margin-bottom: 8px;
+    display: block;
 }
 
 .contactForm {
     width: 100%;
     margin: 0 auto;
     font-family: Arial, sans-serif;
-    margin-top: 80px;
+    margin-top: 40px;
     font-family: "Lexend";
+    padding: 0 15px;
 }
 
 .supportInfo {
     margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .mainText {
@@ -223,16 +241,12 @@ label {
     text-align: center;
     font-family: Lexend;
     font-size: 26px;
+    line-height: 1.4;
+    margin-bottom: 20px;
 }
 
 .formGroup {
     margin-bottom: 1.5rem;
-}
-
-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
 }
 
 input,
@@ -248,15 +262,25 @@ select {
 .submitButton {
     font-family: Molot;
     background-image: url("@assets/images/image3.png");
+    background-size: cover;
+    background-position: center;
     text-decoration: none;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem 1rem;
+    padding: 12px 24px;
     border: none;
     border-radius: 4px;
     margin: 20px auto;
+    cursor: pointer;
+    max-width: 300px;
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+.submitButton:hover {
+    transform: scale(1.02);
 }
 
 .customInput,
@@ -285,17 +309,76 @@ select {
     font-family: "Lexend";
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.5);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
 }
 
 .customSelect option {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.8);
+    background: white;
 }
 
 .customSelect option:disabled {
     color: rgba(255, 255, 255, 0.5);
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
+/* Адаптивные стили */
+@media (max-width: 768px) {
+    .mainText {
+        font-size: 22px;
+    }
+    
+    .secondText {
+        font-size: 11px;
+    }
+    
+    .contactFormMain {
+        padding: 15px;
+    }
+    
+    .submitButton {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainText {
+        font-size: 20px;
+    }
+    
+    .secondText {
+        font-size: 10px;
+    }
+    
+    .contactForm {
+        margin-top: 20px;
+    }
+    
+    .formGroup {
+        margin-bottom: 1rem;
+    }
+    
+    .customInput,
+    .customTextarea,
+    .customSelect {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .submitButton {
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .contactFormMain {
+        width: 70%;
+    }
 }
 </style>

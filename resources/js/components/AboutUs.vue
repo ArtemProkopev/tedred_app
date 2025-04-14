@@ -23,7 +23,7 @@ import gif from "/resources/assets/images/end.gif";
                 Bring people together — whether it's a hilarious chaos in local multiplayer or a deep detective story that you want to discuss.
                 Surprise with mechanics — unexpected turns, tricky maps and non-obvious solutions make each round unique.
                 Tell stories — through dialogues, atmosphere, and game situations, we immerse players in new universes.</p>
-            <img :src="gif">
+            <img :src="gif" class="content-image">
             <p>Our projects
             Feed The Gods
             Casual card battler for 2-6 players
@@ -82,14 +82,98 @@ p {
     color: #B7B7B7;
     font-size: 13px;
     text-align: center;
+    line-height: 1.6;
+    margin: 15px 0;
 }
 
 .information {
-    max-width: 6git0%;
+    max-width: 60%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    padding: 20px 0;
+}
+
+.content-image {
+    max-width: 100%;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+}
+
+/* Медиазапросы для адаптивности */
+@media (max-width: 1200px) {
+    .information {
+        max-width: 70%;
+    }
+}
+
+@media (max-width: 992px) {
+    h1 {
+        font-size: 48px;
+    }
+    
+    h2 {
+        font-size: 32px;
+    }
+    
+    .information {
+        max-width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 40px;
+    }
+    
+    h2 {
+        font-size: 28px;
+        margin-top: 60px;
+    }
+    
+    .information {
+        max-width: 90%;
+    }
+    
+    p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 32px;
+    }
+    
+    h2 {
+        font-size: 24px;
+        margin-top: 40px;
+    }
+    
+    .information {
+        max-width: 95%;
+    }
+    
+    p {
+        font-size: 11px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 28px;
+    }
+    
+    h2 {
+        font-size: 20px;
+    }
+    
+    p {
+        font-size: 10px;
+    }
 }
 </style>
