@@ -146,9 +146,9 @@ const gameItems = ref([
         image: gameimg,
     },
     {
-        title: "The Secret Ties of Strandcliff",
+        title: "Feed The Gods",
         description:
-            "A detective game where you have to play with information while being a successful ram. Communicate with visitors to your establishment, eavesdrop on their conversations, collect information.",
+            "A detective game where you have to play with information while being a successful ram. Communicate with visitors to your establishment. ",
         image: gameimg,
     },
     {
@@ -172,6 +172,9 @@ onMounted(() => {
             pagination: false,
             arrows: false,
             breakpoints: {
+                1000: {
+                    perPage: 1,
+                },
                 640: {
                     height: "6rem",
                 },
@@ -264,6 +267,7 @@ main {
     flex-direction: column;
     gap: 50px;
     margin-top: 100px;
+    flex-wrap: wrap;
 }
 
 .games span {
@@ -467,13 +471,31 @@ main {
 }
 
 /* Адаптивные стили */
-@media (max-width: 1100px) {
-    .slider-container {
-        max-width: 90%;
+@media (max-width: 1280px) {
+    .mainTitleBlock .mainTitleText {
+        font-size: 2.5rem;
+    }
+
+    .titleText {
+        font-size: 56px;
+    }
+
+    .games {
+        margin-top: 80px;
+    }
+
+    .game-item {
+        width: 70%;
+        height: 350px;
+    }
+
+    .game-image {
+        width: 220px;
+        height: 300px;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 830px) {
     .slider-container {
         margin: 50px auto;
     }
@@ -487,48 +509,14 @@ main {
         font-size: 64px;
     }
 
-    .title-wrapper {
-        gap: 10px;
-        flex-direction: column;
-    }
-
-    .game-content {
-        padding: 15px;
-    }
-    
-    .highPartGame {
-        flex-direction: column;
-    }
-
-    .game-image {
-        width: 100%;
-        height: 200px;
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-    
-    .gamesDescription {
-        width: 100%;
-    }
-    
-    .button-container {
-        justify-content: center;
-        padding: 10px 0 0;
-    }
-    
-    .cta-button {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .custom-arrow {
-        width: 35px;
-        height: 35px;
+   
+    .game-item {
+        width: 80%;
+        height: 300px;
     }
 
     .mainTitleBlock .mainTitleText {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     .titleText {
@@ -536,12 +524,207 @@ main {
     }
 
     .gamesTitle {
-        font-size: 28px;
+        font-size: 30px;
     }
 
-    .custom-arrow svg {
+    .gamesDescription {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .game-image {
+        width: 180px;
+        height: 250px;
+    }
+
+    .cta-button {
+        width: 120px;
+        height: 30px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1140px) {
+    .game-item {
+        width: 70%;
+    }
+
+    .slider-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1050px) {
+    .game-item {
+        width: 90%;
+    }
+
+    .slider-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 640px) {
+    .mainTitleBlock {
+        margin-top: 15%;
+    }
+    
+    .title-wrapper {
+        flex-direction: column;
+        gap: 0;
+        width: 100%; 
+        overflow: hidden;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    
+    .quote-left, .quote-right {
+        float: none;
+        margin: 0;
+        font-size: 48px;
+    }
+    
+    .quote-left {
+        align-self: flex-start;
+        margin-left: 10px;
+    }
+    
+    .quote-right {
+        align-self: flex-end;
+        margin-right: 10px;
+    }
+    
+    .mainTitleBlock .mainTitleText {
+        font-size: 1.5rem;
+        line-height: 1.2;
+        padding: 0 10px;
+    }
+    
+    .mainTitleBlock .supportMainTitleText {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+    
+    .titleText {
+        font-size: 32px;
+    }
+    
+    .slider-container {
+        margin: 30px auto;
+        gap: 5px;
+        width: 68%; 
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+    
+    .custom-arrow {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .custom-arrow img {
         width: 20px;
         height: 20px;
+    }
+    
+    .splide__slide {
+        padding: 10px;
+    }
+    
+    .splideTitle {
+        font-size: 1rem;
+        margin-top: 20px;
+    }
+    
+    .splideDescription {
+        font-size: 0.7rem;
+    }
+    
+    .games {
+        margin-top: 50px;
+        gap: 30px;
+        width: 100%; 
+        padding: 0 10px;
+        box-sizing: border-box; 
+    }
+    
+    .game-item {
+        width: 90%;
+        height: auto; 
+        min-height: 450px; 
+        padding: 15px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .game-item::before {
+        border-radius: 5px; 
+    }
+
+    .game-content {
+        height: auto; 
+        padding: 15px;
+    }
+    
+    .highPartGame {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+    
+    .game-image {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .gamesTitle {
+        font-size: 24px;
+        text-align: center;
+        order: -1;
+        margin-bottom: 10px;
+    }
+    
+    .gamesDescription {
+        width: 100%;
+        font-size: 0.8rem;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    .available {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    
+    .steam-logo {
+        margin: 0 auto 15px;
+    }
+    
+    .button-container {
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .cta-button {
+        width: 120px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .game-item {
+        background: #1a1a1a url("@assets/images/main/gameimg.png") no-repeat center center;
+        background-size: cover;
+    }
+}
+
+@media (max-width: 500px) {
+    .game-item {
+        width: 80%;
     }
 }
 </style>

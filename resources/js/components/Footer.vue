@@ -65,7 +65,6 @@
 
 .footerColumn {
     flex: 1;
-    min-width: 200px;
 }
 
 .footerLogo {
