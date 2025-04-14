@@ -1,5 +1,5 @@
 <script setup>
-import Header from "./Header.vue";
+import Header from "./HeaderGame.vue";
 import Footer from "./Footer.vue";
 
 import gameimg from "/resources/assets/images/main/gameimg.png";

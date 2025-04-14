@@ -103,7 +103,6 @@ p {
     border-radius: 8px;
 }
 
-/* Медиазапросы для адаптивности */
 @media (max-width: 1200px) {
     .information {
         max-width: 70%;

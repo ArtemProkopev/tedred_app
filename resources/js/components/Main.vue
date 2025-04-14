@@ -398,7 +398,6 @@ main {
     transform: scale(1.05);
 }
 
-/* Стили для слайдера */
 .slider-container {
     position: relative;
     max-width: 1000px;
@@ -470,7 +469,6 @@ main {
     height: 24px;
 }
 
-/* Адаптивные стили */
 @media (max-width: 1280px) {
     .mainTitleBlock .mainTitleText {
         font-size: 2.5rem;

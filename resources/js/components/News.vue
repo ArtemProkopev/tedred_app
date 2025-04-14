@@ -109,7 +109,6 @@ export default {
     src: url("@assets/fonts/LexendExa-Regular.woff");
 }
 
-/* Основные стили */
 .news {
     display: flex;
     align-items: center;
@@ -194,7 +193,7 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-width: 0; /* Для правильного переноса текста */
+    min-width: 0;
 }
 
 .newsTitle {

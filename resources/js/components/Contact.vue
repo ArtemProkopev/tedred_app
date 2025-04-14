@@ -90,7 +90,6 @@ import Footer from "./Footer.vue";
                 </button>
             </form>
 
-            <!-- Status message -->
             <div v-if="statusMessage" :class="statusClass" class="statusMessage">
                 {{ statusMessage }}
             </div>
@@ -120,7 +119,6 @@ export default {
     },
     methods: {
         handleSubmit() {
-            // Display loading status
             this.statusMessage = "Sending your message...";
             this.statusClass = "loading";
 
@@ -327,7 +325,6 @@ select {
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Адаптивные стили */
 @media (max-width: 768px) {
     .mainText {
         font-size: 22px;

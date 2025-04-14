@@ -14,7 +14,6 @@
                 </ul>
             </nav>
         </section>
-        <h1><span>TedRed</span><br />Games</h1>
     </header>
 </template>
 
@@ -42,24 +41,25 @@ export default {
     background-color: #222;
     color: white;
     width: 100%;
-    min-height: 300px;
-    height: auto; 
-    background-image: url("@assets/images/header1.png");
+    min-height: 500px; 
+    height: auto;
+    background-image: url("@assets/images/gameheader.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     position: relative;
     padding: 20px 0;
-    gap: 20px; 
+    gap: 20px;
 }
 
 span {
     color: #ffc851;
-    font-size: clamp(50px, 10vw, 100px); 
+    font-size: clamp(50px, 10vw, 100px);
 }
+
 h1 {
     font-family: "Molot", sans-serif;
-    font-size: clamp(40px, 7vw, 70px); 
+    font-size: clamp(40px, 7vw, 70px);
     text-align: center;
     margin: 0; 
     line-height: 0.8;

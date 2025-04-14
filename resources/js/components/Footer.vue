@@ -1,49 +1,39 @@
 <template>
     <footer class="mainFooter">
-            <article class="footerContent">
-                <section class="footerColumn leftColumn">
-                    <h3 class="footerLogo">TEDRED GAMES</h3>
-                    <div class="copyright">
-                        © 2025 Tedred Games. All rights reserved.
-                    </div>
-                </section>
+        <article class="footerContent">
+            <section class="footerColumn leftColumn">
+                <h3 class="footerLogo">TEDRED GAMES</h3>
+                <div class="copyright">
+                    © 2025 Tedred Games. All rights reserved.
+                </div>
+            </section>
 
-                <section class="footerColumn rightColumn forRight">
-                    <section class="navigationConnect">
-                        <section class="footerColumn">
-                            <p class="footerTitle">NAVIGATION</p>
-                            <ul class="footerLinks">
-                                <li><a href="#">news</a></li>
-                                <li><a href="#">about us</a></li>
-                                <li><a href="#">team</a></li>
-                                <li><a href="#">contact</a></li>
-                            </ul>
-                        </section>
+            <section class="footerColumn nav">
+                <p class="footerTitle">NAVIGATION</p>
+                <ul class="footerLinks">
+                    <li><a href="#">news</a></li>
+                    <li><a href="#">about us</a></li>
+                    <li><a href="#">team</a></li>
+                    <li><a href="#">contact</a></li>
+                </ul>
+            </section>
 
-                        <section class="footerColumn">
-                            <p class="footerTitle">CONNECT</p>
-                            <section class="socialLinks">
-                                <a href="#" class="socialIcon"
-                                    ><img
-                                        src="@assets/images/instagram.svg"
-                                        alt="Instagram"
-                                /></a>
-                                <a href="#" class="socialIcon"
-                                    ><img
-                                        src="@assets/images/discord.svg"
-                                        alt="Discord"
-                                /></a>
-                                <a href="#" class="socialIcon"
-                                    ><img
-                                        src="@assets/images/steam.svg"
-                                        alt="Steam"
-                                /></a>
-                            </section>
-                        </section>
-                    </section>
+            <section class="footerColumn connect">
+                <p class="footerTitle">CONNECT</p>
+                <section class="socialLinks">
+                    <a href="#" class="socialIcon">
+                        <img src="@assets/images/mail.png" alt="Mail" />
+                    </a>
+                    <a href="https://discord.com/invite/6pDvW7JMHp" class="socialIcon">
+                        <img src="@assets/images/discord.png" alt="Discord" />
+                    </a>
+                    <a href="https://store.steampowered.com/search/?developer=TedRed" class="socialIcon">
+                        <img src="@assets/images/steam.png" alt="Steam" />
+                    </a>
                 </section>
-            </article>
-        </footer>
+            </section>
+        </article>
+    </footer>
 </template>
 
 <style>
@@ -58,13 +48,19 @@
 .footerContent {
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
-    gap: 40px;
+    flex-wrap: wrap;
     padding: 0 20px;
+    max-width: 1200px;
+    gap: 40px;
 }
 
 .footerColumn {
     flex: 1;
+    min-width: 180px;
+}
+
+.leftColumn {
+    max-width: 300px;
 }
 
 .footerLogo {
@@ -133,4 +129,38 @@
     box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 30px;
+    }
+    
+    .leftColumn {
+        max-width: 100%;
+    }
+    
+    .footerLogo {
+        font-size: 28px;
+    }
+    
+    .footerTitle {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainFooter {
+        padding: 40px 0 20px;
+        margin-top: 60px;
+    }
+    
+    .footerContent {
+        padding: 0 20px;
+    }
+    
+    .socialLinks {
+        justify-content: flex-start;
+    }
+}
 </style>

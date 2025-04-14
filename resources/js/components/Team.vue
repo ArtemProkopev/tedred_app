@@ -232,7 +232,6 @@ footer {
     font-size: 0.9rem;
 }
 
-/* Responsive adjustments */
 @media (max-width: 767px) {
     .cards-container {
         grid-template-columns: 1fr;
@@ -268,7 +267,6 @@ footer {
     }
 }
 
-/* Hover effects for non-touch devices */
 @media (hover: hover) {
     .card:hover {
         transform: translateY(-5px);

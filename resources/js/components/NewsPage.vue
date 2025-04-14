@@ -117,7 +117,6 @@ p {
     text-align: center;
 }
 
-/* Медиазапросы для адаптивности */
 @media (max-width: 1200px) {
     .information {
         max-width: 70%;
