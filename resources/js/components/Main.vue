@@ -1,6 +1,6 @@
 <template>
     <header>
-        <Header />
+        <HeaderSlider />
     </header>
     <main>
         <section class="mainTitleBlock">
@@ -97,7 +97,7 @@ import { Splide } from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { onMounted, ref } from "vue";
 import Footer from "./Footer.vue";
-import Header from "./Header.vue";
+import HeaderSlider from "./HeaderSlider.vue";
 
 import gameimg from "/resources/assets/images/main/gameimg.png";
 import nextarrow from "/resources/assets/images/main/nextarrow.svg";

@@ -36,6 +36,11 @@ const routes = [
         name: "newspage",
         component: () => import("./components/NewsPage.vue"),
     },
+    {
+        path: "/slider",
+        name: "slider",
+        component: () => import("./components/HeaderSlider.vue"),
+    },
 ];
 
 const router = createRouter({
