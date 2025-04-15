@@ -2,62 +2,99 @@
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
 import { onMounted, ref } from "vue";
+import { supabase } from "../supabase";
+import { useRoute } from "vue-router";
 
-import newsimg from "/resources/assets/images/news/newsimage.png";
+const route = useRoute();
+const newsItem = ref(null);
+const isLoading = ref(true);
+const error = ref(null);
 
-const newItems = ref([
-    {
-        title: "Feed The Gods out now!",
-        date: "18 december, 2024",
-        subtitle: "Dear Cult Leaders,",
-        descriptionFirst:
-            "Dead Cultists! This day has finally come. Rise to greatness in Feed The Gods! Become a chosen mortal, a daring card-battler who braves the dark halls of forgotten dungeons, faces impossible odds, and earns divine favor by offering their spoils to the ever-hungry gods. This time, you'll be joining this epic clans to get your victory: Children of Growth - forest dwellers, whose masks and rituals reflect a connection to ancient spirits. Chained Brotherhood - treacherous monks cursed by their deity for their unquenchable bloodlust. Seaweed Bloaters - benevolent fishmen, who want to return to the shore and become human again. Knights of Hedone - fearless knights, nobly defending people from the evil gods. Mistresses of Inner Sight - a coven of witches bravely rising up against oppression and injustice. Witnesses of Rock - stone spirits imbued with the mysterious magic of unknown worlds. The Ancient - the ravenous hungry Ancient Deity. Dangerous and deadly.",
-        image: newsimg,
-        descriptionSecond: "With a team of heroes ready to rise to the challenge, Feed The Gods combines: A fast and accessible card-battling system that rewards bold strategies. A rich, hand-painted art style inspired by shadowy dungeons and forgotten relics. Atmospheric soundscapes and immersive audio, crafted to draw you deeper into the gods' world. What are you waiting for? Answer the call of the divine! Master your deck, defeat other challengers, and deliver the ultimate tribute to appease the gods themselves. PS: Offerings are non-refundable. May the gods favor you… or consume you. PPS: if you encounter any bugs/typos or want to share you feedback - don't hesitate to join our Discord or ping us in Discussions!"
+const formatDate = (dateString) => {
+    if (!dateString) return "";
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("ru-RU", options);
+};
+
+const getImageUrl = (imagePath) => {
+    if (!imagePath) return "/resources/assets/images/news/newsimage.png";
+    return imagePath.startsWith("http") ? imagePath : `/storage/${imagePath}`;
+};
+
+onMounted(async () => {
+    try {
+        const id = route.params.id;
+        const { data, error: supabaseError } = await supabase
+            .from("news")
+            .select("*")
+            .eq("id", id)
+            .single();
+
+        if (supabaseError) throw supabaseError;
+
+        newsItem.value = {
+            ...data,
+            image: getImageUrl(data.image_url),
+            formattedDate: formatDate(data.date),
+            subtitle: data.subtitle || "Уважаемые лидеры культов,",
+        };
+    } catch (err) {
+        error.value = err.message;
+        console.error("Ошибка загрузки новости:", err);
+    } finally {
+        isLoading.value = false;
     }
-]);
+});
 </script>
 
 <template>
     <header>
         <Header />
     </header>
-
     <section class="news">
-            <div
-                class="new-item"
-                v-for="(game, index) in newItems"
-                :key="index"
-            >
+        <template v-if="isLoading">
+            <div class="loading">Loading news...</div>
+        </template>
+        <template v-else-if="error">
+            <div class="error-message">{{ error }}</div>
+        </template>
+        <template v-else-if="newsItem">
+            <div class="new-item">
                 <section class="new-content">
                     <section class="highPartNew">
                         <div class="new-image">
-                            <h3 class="newsTitle">{{ game.title }}</h3>
-                            <p id="date">Date of publiction: {{ game.date }}</p>
+                            <h3 class="newsTitle">{{ newsItem.title }}</h3>
+                            <p id="date">
+                                Publication date: {{ newsItem.formattedDate }}
+                            </p>
                             <div class="information">
-                                <p>{{ game.descriptionFirst }}</p>
-                                <div class="image-container">
-                                    <img :src="game.image" :alt="game.title" />
+                                <p>{{ newsItem.subtitle }}</p>
+                                <p>{{ newsItem.description_first }}</p>
+                                <div
+                                    class="image-container"
+                                    v-if="newsItem.image"
+                                >
+                                    <img
+                                        :src="newsItem.image"
+                                        :alt="newsItem.title"
+                                    />
                                 </div>
-                                <p>{{ game.descriptionSecond }}</p>
+                                <p>{{ newsItem.description_second }}</p>
                             </div>
                         </div>
                     </section>
                 </section>
             </div>
-        </section>
-
-    <main>
-
-    </main>
-
+        </template>
+        <template v-else>
+            <div class="error-message">News not found.</div>
+        </template>
+    </section>
     <footer>
         <Footer />
-    </footer>  
+    </footer>
 </template>
-
-<script>
-</script>
 
 <style scoped>
 @font-face {
@@ -70,12 +107,12 @@ const newItems = ref([
 }
 
 #date {
-    color: #6D6D6D;
+    color: #6d6d6d;
 }
 
 p {
     font-family: Lexend;
-    color: #B7B7B7;
+    color: #b7b7b7;
     font-size: 13px;
     text-align: center;
     line-height: 1.6;
@@ -117,6 +154,19 @@ p {
     text-align: center;
 }
 
+.loading,
+.error-message {
+    font-family: Lexend;
+    color: #b7b7b7;
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+}
+
+.error-message {
+    color: #ff6b6b;
+}
+
 @media (max-width: 1200px) {
     .information {
         max-width: 70%;
@@ -124,14 +174,6 @@ p {
 }
 
 @media (max-width: 992px) {
-    h1 {
-        font-size: 48px;
-    }
-    
-    h2 {
-        font-size: 32px;
-    }
-    
     .information {
         max-width: 80%;
     }
@@ -142,38 +184,20 @@ p {
 }
 
 @media (max-width: 768px) {
-    h1 {
-        font-size: 40px;
-    }
-    
-    h2 {
-        font-size: 28px;
-        margin-top: 60px;
-    }
-    
     .information {
         max-width: 90%;
     }
-    
+
     p {
         font-size: 12px;
     }
 }
 
 @media (max-width: 576px) {
-    h1 {
-        font-size: 32px;
-    }
-    
-    h2 {
-        font-size: 24px;
-        margin-top: 40px;
-    }
-    
     .information {
         max-width: 95%;
     }
-    
+
     p {
         font-size: 11px;
         text-align: left;
@@ -185,14 +209,6 @@ p {
 }
 
 @media (max-width: 400px) {
-    h1 {
-        font-size: 28px;
-    }
-    
-    h2 {
-        font-size: 20px;
-    }
-    
     p {
         font-size: 10px;
     }

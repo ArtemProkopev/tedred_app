@@ -2,77 +2,78 @@
 import Header from "./Header.vue";
 import Footer from "./Footer.vue";
 import { onMounted, ref } from "vue";
+import { supabase } from "../supabase";
 
-import gameimg from "/resources/assets/images/main/gameimg.png";
+const newItems = ref([]);
+const isLoading = ref(true);
+const error = ref(null);
 
-const newItems = ref([
-    {
-        title: "PLAY FEED THE GODS ON STEAM NEXT FEST!",
-        subtitle: "Dear Cult Leaders,",
-        description:
-            "The demo version of our chaotic party card battler Feed The Gods is out and available right now!",
-        image: gameimg,
-    },
-    {
-        title: "FEED THE GODS OUT NOW!",
-        description:
-            "This day has finally come. Rise to greatness in Feed The Gods! Become a chosen mortal, a daring card-battler who braves the dark halls of forgotten dungeons, faces impossible odds, and earns divine favor by offering their spoils to the ever-hungry gods.",
-        image: gameimg,
-    },
-    {
-        title: "FEED THE GODS RELEASE DATE",
-        subtitle: "Dear Cultists,",
-        description:
-            "Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.",
-        image: gameimg,
-    },
-    {
-        title: "DEV DIARY #4 - RELEASE DATE AND FUTURE PLANS!",
-        subtitle: "Hello, Cult Leaders!",
-        description:
-            "The playtest has begun! You can conquer the dungeon now until Monday...",
-        image: gameimg,
-    },
-    {
-        title: "THE PLAYTESTS STARTS!",
-        subtitle: "Dear Cult Leaders!",
-        description:
-            "The demo version of our chaotic party card battler Feed The Gods is out and available right now!",
-        image: gameimg,
-    },
-]);
+onMounted(async () => {
+    try {
+        const { data, error: supabaseError } = await supabase
+            .from("news")
+            .select("*")
+            .order("created_at", { ascending: false });
+        if (supabaseError) throw supabaseError;
+
+        newItems.value = data.map((item) => ({
+            ...item,
+            image: item.image_url
+                ? `/storage/${item.image_url}`
+                : "/resources/assets/images/main/gameimg.png",
+            subtitle: item.subtitle || "Dear Cult Leaders,",
+            description: item.description_first || "",
+        }));
+    } catch (err) {
+        error.value = err.message;
+        console.error("Error loading news:", err);
+    } finally {
+        isLoading.value = false;
+    }
+});
+
+const handlePlayClick = () => {
+    console.log("Redirect to news page...");
+};
 </script>
 
 <template>
     <header>
         <Header />
     </header>
-
     <main>
         <section class="news">
+            <div v-if="isLoading" class="loading-state">Loading news...</div>
+            <div v-else-if="error" class="error-state">
+                Error loading news: {{ error }}
+            </div>
             <div
                 class="new-item"
-                v-for="(game, index) in newItems"
+                v-for="(news, index) in newItems"
                 :key="index"
+                v-else
             >
                 <section class="new-content">
                     <section class="highPartNew">
                         <div class="new-image">
                             <div class="image-container">
-                                <img :src="game.image" :alt="game.title" />
+                                <img :src="news.image" :alt="news.title" />
                             </div>
                         </div>
                         <div class="new-text">
-                            <h3 class="newsTitle">{{ game.title }}</h3>
-                            <p class="subtitle" v-if="game.subtitle">
-                                {{ game.subtitle }}
+                            <h3 class="newsTitle">{{ news.title }}</h3>
+                            <p class="subtitle" v-if="news.subtitle">
+                                {{ news.subtitle }}
                             </p>
                             <p class="newsDescription">
-                                {{ game.description }}
+                                {{ news.description }}
                             </p>
                             <div class="button-container">
-                                <router-link to="/newspage">
-                                    <button class="cta-button" @click="handlePlayClick">
+                                <router-link :to="`/newspage/${news.id}`">
+                                    <button
+                                        class="cta-button"
+                                        @click="handlePlayClick"
+                                    >
                                         See all
                                     </button>
                                 </router-link>
@@ -83,21 +84,10 @@ const newItems = ref([
             </div>
         </section>
     </main>
-
     <footer>
         <Footer />
-    </footer>  
+    </footer>
 </template>
-
-<script>
-export default {
-  methods: {
-    handlePlayClick() {
-      console.log('Redirect to Steam...')
-    }
-  }
-}
-</script>
 
 <style scoped>
 @font-face {
@@ -107,6 +97,19 @@ export default {
 @font-face {
     font-family: Lexend;
     src: url("@assets/fonts/LexendExa-Regular.woff");
+}
+
+.loading-state,
+.error-state {
+    color: white;
+    font-family: Lexend;
+    font-size: 18px;
+    text-align: center;
+    padding: 40px;
+}
+
+.error-state {
+    color: #ff6b6b;
 }
 
 .news {
@@ -259,40 +262,40 @@ export default {
         margin-top: 80px;
         gap: 40px;
     }
-    
+
     .new-item {
         min-height: auto;
     }
-    
+
     .highPartNew {
         flex-direction: column;
         gap: 20px;
     }
-    
+
     .new-image {
         width: 100%;
         max-width: 400px;
         height: 250px;
         margin: 0 auto;
     }
-    
+
     .new-text {
         text-align: center;
     }
-    
+
     .button-container {
         justify-content: center;
     }
-    
+
     .newsTitle {
         font-size: 28px;
         text-align: center;
     }
-    
+
     .subtitle {
         text-align: center;
     }
-    
+
     .newsDescription {
         text-align: center;
     }
@@ -303,15 +306,15 @@ export default {
         margin-top: 60px;
         gap: 30px;
     }
-    
+
     .newsTitle {
         font-size: 24px;
     }
-    
+
     .newsDescription {
         font-size: 14px;
     }
-    
+
     .cta-button {
         width: 140px;
         height: 35px;
@@ -325,23 +328,23 @@ export default {
         gap: 25px;
         padding: 0 15px;
     }
-    
+
     .new-item {
         padding: 15px;
     }
-    
+
     .new-image {
         height: 200px;
     }
-    
+
     .newsTitle {
         font-size: 22px;
     }
-    
+
     .subtitle {
         font-size: 15px;
     }
-    
+
     .cta-button {
         width: 130px;
         height: 32px;
@@ -353,11 +356,11 @@ export default {
     .newsTitle {
         font-size: 20px;
     }
-    
+
     .newsDescription {
         font-size: 13px;
     }
-    
+
     .cta-button {
         width: 120px;
         height: 30px;

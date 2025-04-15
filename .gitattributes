@@ -1,5 +1,12 @@
 * text=auto eol=lf
 
+# Установить LF для всех текстовых файлов
+* text=auto
+
+# Явно указать формат для конкретных типов файлов
+*.php text eol=lf
+*.js text eol=lf
+
 # ====================
 # File Specific Handling
 # ====================

@@ -21,12 +21,10 @@
         </section>
 
         <p class="titleText">News</p>
-
         <div class="slider-container">
             <button class="custom-arrow custom-prev">
-                <img :src="prevarrow" alt="" />
+                <img :src="prevarrow" alt="Previous" />
             </button>
-
             <section class="splide" aria-label="News slider">
                 <div class="splide__track">
                     <ul class="splide__list">
@@ -40,15 +38,17 @@
                             </div>
                             <h3 class="splideTitle">{{ item.title }}</h3>
                             <p class="splideDescription">
-                                {{ item.description }}
+                                {{ truncateText(item.description, 120) }}
                             </p>
+                            <router-link :to="`/newspage/${item.id}`">
+                                <button class="cta-button">Read more</button>
+                            </router-link>
                         </li>
                     </ul>
                 </div>
             </section>
-
             <button class="custom-arrow custom-next">
-                <img :src="nextarrow" alt="" />
+                <img :src="nextarrow" alt="Next" />
             </button>
         </div>
 
@@ -75,7 +75,10 @@
                             <img :src="steam" alt="Steam" class="steam-logo" />
                             <div class="button-container">
                                 <router-link to="/gamepage">
-                                    <button class="cta-button" @click="handlePlayClick">
+                                    <button
+                                        class="cta-button"
+                                        @click="handlePlayClick"
+                                    >
                                         Game page
                                     </button>
                                 </router-link>
@@ -86,7 +89,6 @@
             </div>
         </section>
     </main>
-
     <footer>
         <Footer />
     </footer>
@@ -95,48 +97,84 @@
 <script setup>
 import { Splide } from "@splidejs/splide";
 import "@splidejs/splide/dist/css/splide.min.css";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, nextTick } from "vue";
+import { supabase } from "../supabase";
 import Footer from "./Footer.vue";
 import HeaderSlider from "./HeaderSlider.vue";
-
-import gameimg from "/resources/assets/images/main/gameimg.png";
 import nextarrow from "/resources/assets/images/main/nextarrow.svg";
 import prevarrow from "/resources/assets/images/main/prevarrow.svg";
 import steam from "/resources/assets/images/main/steam.png";
-import title1 from "/resources/assets/images/main/title1.png";
-import title2 from "/resources/assets/images/main/title2.png";
-import title3 from "/resources/assets/images/main/title3.png";
+import gameimg from "/resources/assets/images/main/gameimg.png";
 
-const newsItems = ref([
-    {
-        title: "Feed The Gods out now!",
-        description:
-            "This day has finally come. Rise to greatness in Feed The G...",
-        image: title1,
-    },
-    {
-        title: "Feed The Gods Release Date",
-        description: "The Ancient One stir, hungry for devotion and sacrifi...",
-        image: title2,
-    },
-    {
-        title: "Dev Diary #4 - Release Date and future plans!",
-        description: "Wow, Its been a long time since we have been in tou...",
-        image: title3,
-    },
-    {
-        title: "The Playtests starts!",
-        description:
-            "Visit the Feed The Gods Steam store page starting today...",
-        image: title1,
-    },
-    {
-        title: "Play FEED THE GODS on Steam Next Fest!",
-        description:
-            "The demo version of our chaotic party card battler Feed The Gods...",
-        image: title1,
-    },
-]);
+const newsItems = ref([]);
+const isLoading = ref(true);
+const error = ref(null);
+
+const getImageUrl = (imagePath) => {
+    return imagePath?.startsWith("http") ? imagePath : `/storage/${imagePath}`;
+};
+
+const fetchNews = async () => {
+    try {
+        const { data, error: supabaseError } = await supabase
+            .from("news")
+            .select("id, title, description_first, image_url")
+            .order("created_at", { ascending: false })
+            .limit(5);
+
+        if (supabaseError) throw supabaseError;
+
+        newsItems.value = data.map((item) => ({
+            ...item,
+            description: item.description_first,
+            image: getImageUrl(item.image_url),
+        }));
+    } catch (err) {
+        error.value = err.message;
+        console.error("Ошибка загрузки новостей:", err);
+    } finally {
+        isLoading.value = false;
+    }
+};
+
+onMounted(async () => {
+    await fetchNews();
+
+    await nextTick();
+
+    const splideElement = document.querySelector(".splide");
+    if (splideElement && newsItems.value.length > 0) {
+        const splide = new Splide(splideElement, {
+            type: "loop",
+            height: "auto",
+            perPage: 3,
+            pagination: false,
+            arrows: false,
+            breakpoints: {
+                1000: { perPage: 1 },
+                640: {
+                    perPage: 1,
+                    height: "auto",
+                },
+            },
+        }).mount();
+
+        document
+            .querySelector(".custom-prev")
+            ?.addEventListener("click", () => splide.go("<"));
+
+        document
+            .querySelector(".custom-next")
+            ?.addEventListener("click", () => splide.go(">"));
+    }
+});
+
+const truncateText = (text, maxLength) => {
+    if (!text) return "";
+    return text.length > maxLength
+        ? text.slice(0, maxLength).trimEnd() + "..."
+        : text;
+};
 
 const gameItems = ref([
     {
@@ -145,50 +183,7 @@ const gameItems = ref([
             "Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.",
         image: gameimg,
     },
-    {
-        title: "Feed The Gods",
-        description:
-            "A detective game where you have to play with information while being a successful ram. Communicate with visitors to your establishment. ",
-        image: gameimg,
-    },
-    {
-        title: "Feed The Gods",
-        description:
-            "Feed The Gods is a casual card battler for 2-6 players. In this chaotic game, you and your friends will use powerful cards to win.",
-        image: gameimg,
-    },
 ]);
-
-onMounted(() => {
-    const splideElement = document.querySelector(".splide");
-
-    if (splideElement) {
-        const splide = new Splide(splideElement, {
-            type: "loop",
-            height: "9rem",
-            trimSpace: "move",
-            perPage: 3,
-            start: 0,
-            pagination: false,
-            arrows: false,
-            breakpoints: {
-                1000: {
-                    perPage: 1,
-                },
-                640: {
-                    height: "6rem",
-                },
-            },
-        }).mount();
-
-        document
-            .querySelector(".custom-prev")
-            ?.addEventListener("click", () => splide.go("<"));
-        document
-            .querySelector(".custom-next")
-            ?.addEventListener("click", () => splide.go(">"));
-    }
-});
 </script>
 
 <style scoped>
@@ -420,9 +415,10 @@ main {
     color: white;
     text-align: center;
     transition: transform 0.3s;
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
+    min-height: 300px;
 }
 
 .splide__slide img {
@@ -442,6 +438,15 @@ main {
 .splideDescription {
     font-size: 0.9rem;
     color: #ccc;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    line-height: 1.4;
+    max-height: calc(1.4em * 3);
 }
 
 .custom-arrow {
@@ -473,20 +478,16 @@ main {
     .mainTitleBlock .mainTitleText {
         font-size: 2.5rem;
     }
-
     .titleText {
         font-size: 56px;
     }
-
     .games {
         margin-top: 80px;
     }
-
     .game-item {
         width: 70%;
         height: 350px;
     }
-
     .game-image {
         width: 220px;
         height: 300px;
@@ -497,44 +498,34 @@ main {
     .slider-container {
         margin: 50px auto;
     }
-
     .custom-arrow {
         width: 40px;
         height: 40px;
     }
-
     .quote {
         font-size: 64px;
     }
-
-   
     .game-item {
         width: 80%;
         height: 300px;
     }
-
     .mainTitleBlock .mainTitleText {
         font-size: 2.2rem;
     }
-
     .titleText {
         font-size: 48px;
     }
-
     .gamesTitle {
         font-size: 30px;
     }
-
     .gamesDescription {
         width: 100%;
         font-size: 12px;
     }
-
     .game-image {
         width: 180px;
         height: 250px;
     }
-
     .cta-button {
         width: 120px;
         height: 30px;
@@ -546,7 +537,6 @@ main {
     .game-item {
         width: 70%;
     }
-
     .slider-container {
         width: 70%;
     }
@@ -556,7 +546,6 @@ main {
     .game-item {
         width: 90%;
     }
-
     .slider-container {
         width: 70%;
     }
@@ -566,111 +555,97 @@ main {
     .mainTitleBlock {
         margin-top: 15%;
     }
-    
     .title-wrapper {
         flex-direction: column;
         gap: 0;
-        width: 100%; 
+        width: 100%;
         overflow: hidden;
         padding: 0 10px;
         box-sizing: border-box;
     }
-    
-    .quote-left, .quote-right {
+    .quote-left,
+    .quote-right {
         float: none;
         margin: 0;
         font-size: 48px;
     }
-    
     .quote-left {
         align-self: flex-start;
         margin-left: 10px;
     }
-    
     .quote-right {
         align-self: flex-end;
         margin-right: 10px;
     }
-    
     .mainTitleBlock .mainTitleText {
         font-size: 1.5rem;
         line-height: 1.2;
         padding: 0 10px;
     }
-    
     .mainTitleBlock .supportMainTitleText {
         font-size: 0.9rem;
         padding: 0 10px;
     }
-    
     .titleText {
         font-size: 32px;
     }
-    
     .slider-container {
         margin: 30px auto;
         gap: 5px;
-        width: 68%; 
+        width: 68%;
         padding: 0 10px;
         box-sizing: border-box;
     }
-    
     .custom-arrow {
         width: 30px;
         height: 30px;
     }
-    
     .custom-arrow img {
         width: 20px;
         height: 20px;
     }
-    
     .splide__slide {
         padding: 10px;
+        min-height: 250px;
     }
-    
     .splideTitle {
         font-size: 1rem;
         margin-top: 20px;
     }
-    
     .splideDescription {
         font-size: 0.7rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        max-height: calc(1.4em * 2);
     }
-    
     .games {
         margin-top: 50px;
         gap: 30px;
-        width: 100%; 
+        width: 100%;
         padding: 0 10px;
-        box-sizing: border-box; 
+        box-sizing: border-box;
     }
-    
     .game-item {
         width: 90%;
-        height: auto; 
-        min-height: 450px; 
+        height: auto;
+        min-height: 450px;
         padding: 15px;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
-
     .game-item::before {
-        border-radius: 5px; 
+        border-radius: 5px;
     }
-
     .game-content {
-        height: auto; 
+        height: auto;
         padding: 15px;
     }
-    
     .highPartGame {
         flex-direction: column;
         align-items: center;
         height: auto;
     }
-    
     .game-image {
         width: 100%;
         max-width: 200px;
@@ -678,44 +653,38 @@ main {
         margin-right: 0;
         margin-bottom: 15px;
     }
-    
     .gamesTitle {
         font-size: 24px;
         text-align: center;
         order: -1;
         margin-bottom: 10px;
     }
-    
     .gamesDescription {
         width: 100%;
         font-size: 0.8rem;
         text-align: center;
         margin-bottom: 15px;
     }
-    
     .available {
         font-size: 18px;
         text-align: center;
         margin-bottom: 5px;
     }
-    
     .steam-logo {
         margin: 0 auto 15px;
     }
-    
     .button-container {
         justify-content: center;
         margin-top: 10px;
     }
-    
     .cta-button {
         width: 120px;
         height: 30px;
         font-size: 14px;
     }
-
     .game-item {
-        background: #1a1a1a url("@assets/images/main/gameimg.png") no-repeat center center;
+        background: #1a1a1a url("@assets/images/main/gameimg.png") no-repeat
+            center center;
         background-size: cover;
     }
 }

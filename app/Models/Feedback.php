@@ -18,6 +18,5 @@ class Feedback extends Model
         'message'
     ];
 
-    // Если хотите автоматическое создание временных меток
     public $timestamps = true;
 }

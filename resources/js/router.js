@@ -15,6 +15,7 @@ const routes = [
         path: "/news",
         name: "news",
         component: () => import("./components/News.vue"),
+        // component: News,
     },
     {
         path: "/gamepage",
@@ -32,7 +33,7 @@ const routes = [
         component: () => import("./components/AboutUs.vue"),
     },
     {
-        path: "/newspage",
+        path: "/newspage/:id",
         name: "newspage",
         component: () => import("./components/NewsPage.vue"),
     },
