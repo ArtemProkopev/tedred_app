@@ -1,9 +1,9 @@
 <script setup>
-import Header from "./Header.vue";
-import Footer from "./Footer.vue";
 import { onMounted, ref } from "vue";
-import { supabase } from "../supabase";
 import { useRoute } from "vue-router";
+import { supabase } from "../supabase";
+import Footer from "./Footer.vue";
+import Header from "./Header.vue";
 
 const route = useRoute();
 const newsItem = ref(null);
@@ -14,7 +14,7 @@ const formatDate = (dateString) => {
     if (!dateString) return "";
     const options = { year: "numeric", month: "long", day: "numeric" };
     const date = new Date(dateString);
-    return date.toLocaleDateString("ru-RU", options);
+    return date.toLocaleDateString("en-US", options);
 };
 
 const getImageUrl = (imagePath) => {
