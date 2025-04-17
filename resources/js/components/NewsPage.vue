@@ -18,8 +18,11 @@ const formatDate = (dateString) => {
 };
 
 const getImageUrl = (imagePath) => {
-    if (!imagePath) return "/resources/assets/images/news/newsimage.png";
-    return imagePath.startsWith("http") ? imagePath : `/storage/${imagePath}`;
+  if (!imagePath) return "/resources/assets/images/main/gameimg.png";
+  // Если URL уже полный (от Cloudinary), возвращаем как есть
+  if (imagePath.startsWith("http")) return imagePath;
+  // Для старых локальных изображений (если нужно поддерживать обратную совместимость)
+  return `/storage/${imagePath}`;
 };
 
 onMounted(async () => {

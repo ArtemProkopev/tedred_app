@@ -37,7 +37,7 @@ class NewsResource extends ModelResource
                 ->sortable(),
             Image::make('Image', 'image_url')
                 ->dir('news_images')
-                ->disk('public'),
+                ->disk('cloudinary'),
         ];
     }
 
@@ -54,7 +54,7 @@ class NewsResource extends ModelResource
                 Textarea::make('Second Description Part', 'description_second'),
                 Image::make('Image', 'image_url')
                     ->dir('news_images')
-                    ->disk('public'),
+                    ->disk('cloudinary'),
             ])
         ];
     }
@@ -70,7 +70,7 @@ class NewsResource extends ModelResource
             Textarea::make('Second Description Part', 'description_second'),
             Image::make('Image', 'image_url')
                 ->dir('news_images')
-                ->disk('public'),
+                ->disk('cloudinary'),
         ];
     }
 

@@ -8,6 +8,8 @@ Route::post('/contact', [FeedbackController::class, 'store']);
 Route::post('/news', [FeedbackController::class, 'store']);
 Route::get('/admin/messages', [FeedbackController::class, 'index']);
 
+Route::post('/upload-image', [ImageUploadController::class, 'upload']); //cload
+
 // Главный catch-all маршрут для Vue.js
 Route::get('/{any}', function () {
     return view('welcome');

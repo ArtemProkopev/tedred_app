@@ -16,6 +16,24 @@ class News extends Model
         'image_url',
     ];
 
+    protected $casts = [
+        'date' => 'date',
+    ];
+
+    // Если нужно преобразовать URL для фронтенда
+    public function getImageUrlAttribute($value)
+    {
+        if (!$value) return null;
+        
+        // Если URL уже полный (из Cloudinary)
+        if (strpos($value, 'http') === 0) {
+            return $value;
+        }
+        
+        // Для обратной совместимости с локальными файлами
+        return asset('storage/'.$value);
+    }
+
     // Мутатор для автоматического форматирования даты
     public function setDateAttribute($value)
     {
