@@ -1,7 +1,13 @@
-import { createApp } from "vue"; // Импортируем Vue
-import "./bootstrap"; // Оставляем подключение bootstrap.js
-import App from "./components/App.vue"; // Импортируем главный компонент Vue
-import router from "./router"; // Импортируем маршруты
+// Подключаем стили Tailwind
+import "../css/app.css";
 
-// Создаем экземпляр приложения Vue и монтируем его на элемент с id="app"
+// Laravel-bootstrap (axios, CSRF-токен и т.п.)
+import "./bootstrap";
+
+// Vue
+import { createApp } from "vue";
+import App from "./components/App.vue";
+import router from "./router";
+
+// Создаём и монтируем SPA
 createApp(App).use(router).mount("#app");
